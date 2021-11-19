@@ -5,8 +5,8 @@ using namespace std;
 int main()
  {
   string answer;
-  cout<<"Hello! Welcome to our T-shirt shop.\n";
-  cout<<"We have a variety of Brands and colors at cheap prices to choose from.\n";
+  cout<<"Hello! Welcome to our T-shirt shop.\n\n";
+  cout<<"We have a variety of Brands and colors at cheap prices to choose from.\n\n";
   cout<<"Do you have an account with us? ";
   cin>>answer;
     if (answer == "no")
@@ -16,7 +16,8 @@ int main()
         cin>>b;
         if (b == "no")
         {
-        return 0;
+         cout<<"Goodbye.";
+         return 0;
         }
         if (b == "yes")
         {
