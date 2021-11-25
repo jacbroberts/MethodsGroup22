@@ -9,5 +9,6 @@
 int main() {
     std::cout << "Testing\n";
     User user;
+    user.Register("morgen", "pass");
     return 0;
 }

@@ -7,6 +7,12 @@
 #pragma once
 
 #include <string>
+#include <ostream>
+#include <fstream>
+#include <iostream>
+
+static const std::string USER_FILE = "users.dat";
+static auto &OutStream = std::cout;
 
 class User {
     // User details
@@ -20,6 +26,9 @@ class User {
     std::string shippingAddress;
     std::string paymentInfo;
     int cartID;
+
+    bool OpenUserFileRead(std::ifstream &f, std::ostream &os);
+    bool OpenUserFileAppend(std::ofstream &f, std::ostream &os);
 public:
     User();
 

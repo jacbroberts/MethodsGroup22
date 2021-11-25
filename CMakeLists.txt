@@ -5,4 +5,4 @@ project(MethodsFinal)
 
 add_compile_options(-Wall)
 
-add_executable(MethodsFinal main.cpp)
+add_executable(MethodsFinal user.cpp main.cpp)
