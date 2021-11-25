@@ -18,4 +18,15 @@ class User {
     std::string shippingAddress;
     std::string paymentInfo;
     int cartID;
+public:
+    User();
+
+    // Register, login, logout
+    bool Register(std::string username, std::string password);
+    bool Login(std::string username, std::string password);
+    void Logout();
+
+    bool DeleteUser();
+    bool EditShipping(std::string shipping);
+    bool EditPayment(std::string paymentInfo);
 };
