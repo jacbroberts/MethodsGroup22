@@ -40,4 +40,7 @@ public:
     bool DeleteUser();
     bool EditShipping(std::string shipping);
     bool EditPayment(std::string paymentInfo);
+
+    // Getters
+    bool GetIsLoggedIn() const;
 };

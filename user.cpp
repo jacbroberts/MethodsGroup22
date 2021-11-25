@@ -38,6 +38,11 @@ bool User::OpenUserFileAppend(std::ofstream &f, std::ostream &os){
 }
 
 bool User::Register(std::string username, std::string password) {
+    if(loggedIn) {
+        OutStream << "Registration failed: Already logged in. Logout first!\n";
+        return false;
+    }
+    
     // Open user file
     std::ifstream userFile;
     if(!OpenUserFileRead(userFile, OutStream)) {
@@ -75,6 +80,9 @@ bool User::Register(std::string username, std::string password) {
     }
 
     // Create the user, and add it to the file
+
+    // TODO: Create the cart
+
     // Open file with append
     userFile.close();
     std::ofstream userFileW;
@@ -98,4 +106,77 @@ bool User::Register(std::string username, std::string password) {
     password = password;
     loggedIn = true;
     return true;
+}
+
+
+bool User::Login(std::string username, std::string password) {
+    if(loggedIn) {
+        OutStream << "Login failed: Already logged in. Logout first!\n";
+        return false;
+    }
+
+    // Verify username is valid
+    if(username.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
+        OutStream << "Login failed: Invalid username!\n";
+        return false;
+    }
+
+    // Verify password is valid
+    if(password.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
+        OutStream << "Login failed: Invalid password!\n";
+        return false;
+    }
+
+    // Open user file
+    std::ifstream userFile;
+    if(!OpenUserFileRead(userFile, OutStream)) {
+        return false;
+    }
+
+    // Check if user is in the file
+    bool userExists = false;
+    std::string line;
+    std::string realPassword;
+    while(std::getline(userFile, line)) {
+        if(line.substr(0, 5) == "user:") {
+            size_t userEnd = line.find(":", 5);
+            std::string currUsername = line.substr(5, userEnd-5);
+            if(currUsername == username) {
+                userExists = true;
+
+                // Get the password from the file
+                size_t passwordStart = line.find(":", userEnd+1);
+                size_t passwordEnd = line.find(":", passwordStart+1);
+                realPassword = line.substr(passwordStart+1, passwordEnd-passwordStart-1);
+                break;
+            }
+        }
+    }
+    if(!userExists) {
+        OutStream << "Login failed: No user exists with the given username!\n";
+        return false;
+    }
+
+    // Compare password
+    if(password != realPassword) {
+        OutStream << "Login failed: Passwords do not match!\n";
+        return false;
+    }
+    
+
+    // Successfully logged in
+    username = username;
+    password = password;
+    loggedIn = true;
+    return true;
+}
+
+void User::Logout() {
+    if(loggedIn) {
+        loggedIn = false;
+    }
+}
+
+bool User::GetIsLoggedIn() const {
+    return loggedIn;
 }
