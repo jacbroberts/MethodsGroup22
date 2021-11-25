@@ -4,6 +4,8 @@
     Written by: Morgen Malinoski
 */
 
+#pragma once
+
 #include <string>
 
 class User {
