@@ -1,4 +1,5 @@
 #include <iostream>
+#include "cart.h"
 
 using namespace std;
 
@@ -25,11 +26,21 @@ int main()
         cout<<"Splendid!\n";
         cout<<"Enter new username: ";
         cin>>username;
+        Cart cart(username);
+        cart.addItem("black shirt, medium", 2);
+        cart.addItem("white shirt, large", 2);
+
+        cart.removeItem("black shirt, medium");
+        cart.viewCart();
+
+        cart.checkout();
         }
      }
     // rt: Yes I do have an account
     if (answer == "yes")
-     {
-        cout<<"Login";
-     }
+    {
+      cout << "Login" << endl;
+    }
+
+
  }
