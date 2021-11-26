@@ -28,8 +28,11 @@ bool User::OpenUserFileRead(std::ifstream &f, std::ostream &os) const {
     return true;
 }
 
-bool User::OpenUserFileAppend(std::ofstream &f, std::ostream &os) const {
-    f.open(USER_FILE, std::ios_base::app);
+bool User::OpenUserFileWrite(std::ofstream &f, std::ostream &os, bool append) const {
+    if(append)
+        f.open(USER_FILE, std::ios_base::app);
+    else
+        f.open(USER_FILE);
     if(!f.is_open()) {
         os << "File could not be opened.\n";
         return false; // File not opened
@@ -87,18 +90,19 @@ std::string &outShipping, std::string &outPayment, int &outCartID) const {
             }
         }
     }
+    userFile.close();
     return userExists;
+}
+
+bool User::GetUserExists(std::string inUsername) const {
+    std::string p,f,l,s,y;
+    int c;
+    return LoadUserFromFile(inUsername, p,f,l,s,y,c); 
 }
 
 bool User::Register(std::string username, std::string password, std::string firstName, std::string lastName, std::string shippingAddress, std::string paymentInfo) {
     if(loggedIn) {
         OutStream << "Registration failed: Already logged in. Logout first!\n";
-        return false;
-    }
-    
-    // Open user file
-    std::ifstream userFile;
-    if(!OpenUserFileRead(userFile, OutStream)) {
         return false;
     }
 
@@ -115,18 +119,7 @@ bool User::Register(std::string username, std::string password, std::string firs
     }
 
     // Check if user is in the file
-    bool userExists = false;
-    std::string line;
-    while(std::getline(userFile, line)) {
-        if(line.substr(0, 5) == "user:") {
-            size_t userEnd = line.find(":", 5);
-            std::string currUsername = line.substr(5, userEnd-5);
-            if(currUsername == username) {
-                userExists = true;
-                break;
-            }
-        }
-    }
+    bool userExists = GetUserExists(username);
     if(userExists) {
         OutStream << "Registration failed: Username already taken!\n";
         return false;
@@ -137,9 +130,8 @@ bool User::Register(std::string username, std::string password, std::string firs
     // TODO: Create the cart
 
     // Open file with append
-    userFile.close();
     std::ofstream userFileW;
-    if(!OpenUserFileAppend(userFileW, OutStream)) {
+    if(!OpenUserFileWrite(userFileW, OutStream, true)) {
         return false;
     }
 
@@ -166,7 +158,7 @@ bool User::Register(std::string username, std::string password, std::string firs
 }
 
 
-bool User::Login(std::string username, std::string password) {
+bool User::Login(std::string inUsername, std::string inPassword) {
     if(loggedIn) {
         OutStream << "Login failed: Already logged in. Logout first!\n";
         return false;
@@ -186,21 +178,21 @@ bool User::Login(std::string username, std::string password) {
 
     std::string realPassword, lFirstname, lLastname, lShipping, lPayment;
     int lCartID;
-    bool userExists = LoadUserFromFile(username, realPassword, lFirstname, lLastname, lShipping, lPayment, lCartID);
+    bool userExists = LoadUserFromFile(inUsername, realPassword, lFirstname, lLastname, lShipping, lPayment, lCartID);
     if(!userExists) {
         OutStream << "Login failed: No user exists with the given username!\n";
         return false;
     }
 
     // Compare password
-    if(password != realPassword) {
+    if(inPassword != realPassword) {
         OutStream << "Login failed: Passwords do not match!\n";
         return false;
     }
 
     // Successfully logged in
-    username = username;
-    password = password;
+    username = inUsername;
+    password = inPassword;
     loggedIn = true;
     firstName = lFirstname;
     lastName = lLastname;
@@ -215,6 +207,46 @@ void User::Logout() {
     if(loggedIn) {
         loggedIn = false;
     }
+}
+
+bool User::DeleteUser() {
+    if(!loggedIn) {
+        OutStream << "Delete User Failed: Must login first!\n";
+        return false;
+    }
+    loggedIn = false; // Logout
+
+    // Open user file
+    std::ifstream userFile;
+    if(!OpenUserFileRead(userFile, OutStream)) {
+        return false;
+    }
+
+    // Keep everything except current user in file
+    std::string contents;
+    std::string line;
+    while(std::getline(userFile, line)) {
+        if(line.substr(0, 5) == "user:") {
+            size_t userEnd = line.find(":", 5);
+            std::string currUsername = line.substr(5, userEnd-5);
+            if(currUsername != username) {
+                contents += line + '\n';
+            }
+        }
+    }
+    userFile.close();
+
+    std::ofstream userFileW;
+    if(!OpenUserFileWrite(userFileW, OutStream, false)) {
+        return false;
+    }
+
+    // Write to file
+    std::cout << username;
+    userFileW << contents;
+    userFileW.close();
+
+    return true;
 }
 
 bool User::GetIsLoggedIn() const {

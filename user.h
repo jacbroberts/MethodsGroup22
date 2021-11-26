@@ -28,16 +28,17 @@ class User {
     int cartID;
 
     bool OpenUserFileRead(std::ifstream &f, std::ostream &os) const;
-    bool OpenUserFileAppend(std::ofstream &f, std::ostream &os) const;
+    bool OpenUserFileWrite(std::ofstream &f, std::ostream &os, bool append) const;
     bool LoadUserFromFile(std::string inUsername, std::string &outPassword, std::string &outFirstName, std::string &outLastName, 
         std::string &outShipping, std::string &outPayment, int &outCartID) const;
+    bool GetUserExists(std::string inUsername) const;
 public:
     User();
 
     // Register, login, logout
         bool Register(std::string username, std::string password, std::string firstName, std::string lastName,
             std::string shippingAddress, std::string paymentInfo);
-    bool Login(std::string username, std::string password);
+    bool Login(std::string inUsername, std::string inPassword);
     void Logout();
 
     bool DeleteUser();

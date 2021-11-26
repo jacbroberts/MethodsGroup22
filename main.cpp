@@ -9,12 +9,15 @@
 int main() {
     std::cout << "Testing\n";
     User user;
-    user.Register("morgen", "pass", "Morgen", "M", " ", " ");
-    
+    //user.Register("testing", "testPassword", "w", "M", "Test Address 1515", "1515");
+    //user.Register("morgen", "pass", "Morgen", "M", "Address", "CCN");
+
     user.Login("morgen", "pass");
 
     if(user.GetIsLoggedIn()) {
         std::cout << "Logged in successfully!\n";
     }
+
+    user.DeleteUser();
     return 0;
 }
