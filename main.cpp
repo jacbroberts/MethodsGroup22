@@ -18,6 +18,8 @@ int main() {
         std::cout << "Logged in successfully!\n";
     }
 
-    user.DeleteUser();
+    user.EditPayment("New Credit card number");
+    //user.DeleteUser();
+    user.EditShipping("New Address");
     return 0;
 }

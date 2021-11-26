@@ -32,18 +32,20 @@ class User {
     bool LoadUserFromFile(std::string inUsername, std::string &outPassword, std::string &outFirstName, std::string &outLastName, 
         std::string &outShipping, std::string &outPayment, int &outCartID) const;
     bool GetUserExists(std::string inUsername) const;
+    bool ExportUserToString(std::string &outString) const;
+    bool UpdateUserToFile();
 public:
     User();
 
     // Register, login, logout
-        bool Register(std::string username, std::string password, std::string firstName, std::string lastName,
-            std::string shippingAddress, std::string paymentInfo);
+        bool Register(std::string inUsername, std::string inPassword, std::string inFirstName, std::string inLastName,
+            std::string inShippingAddress, std::string inPaymentInfo);
     bool Login(std::string inUsername, std::string inPassword);
     void Logout();
 
     bool DeleteUser();
-    bool EditShipping(std::string shipping);
-    bool EditPayment(std::string paymentInfo);
+    bool EditShipping(std::string inShipping);
+    bool EditPayment(std::string inPaymentInfo);
 
     // Getters
     bool GetIsLoggedIn() const;

@@ -100,7 +100,58 @@ bool User::GetUserExists(std::string inUsername) const {
     return LoadUserFromFile(inUsername, p,f,l,s,y,c); 
 }
 
-bool User::Register(std::string username, std::string password, std::string firstName, std::string lastName, std::string shippingAddress, std::string paymentInfo) {
+bool User::ExportUserToString(std::string &outString) const {
+    if(loggedIn) {
+        outString = "user:" + username + ":password:" + password + ":firstname:" + firstName + ":lastname:" + lastName+ ":shipping:" + shippingAddress+ ":payment:" + paymentInfo + ":cartID:" + " " + "\n";
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool User::UpdateUserToFile() { 
+    // Open user file
+    std::ifstream userFile;
+    if(!OpenUserFileRead(userFile, OutStream)) {
+        return false;
+    }
+
+    // Keep everything except current user in file, which is updated at the end
+    std::string contents;
+    std::string line;
+    while(std::getline(userFile, line)) {
+        if(line.substr(0, 5) == "user:") {
+            size_t userEnd = line.find(":", 5);
+            std::string currUsername = line.substr(5, userEnd-5);
+            if(currUsername != username) {
+                contents += line + '\n';
+            }
+        }
+    }
+    userFile.close();
+
+    std::ofstream userFileW;
+    if(!OpenUserFileWrite(userFileW, OutStream, false)) {
+        return false;
+    }
+
+    // Write to file
+    userFileW << contents;
+
+    std::string currUser;
+    if(!ExportUserToString(currUser)) {
+        return false;
+    }
+
+    userFileW << currUser;
+
+    userFileW.close();
+
+    return true;
+}
+
+bool User::Register(std::string inUsername, std::string inPassword, std::string inFirstName, std::string inLastName, std::string inShippingAddress, std::string inPaymentInfo) {
     if(loggedIn) {
         OutStream << "Registration failed: Already logged in. Logout first!\n";
         return false;
@@ -135,6 +186,15 @@ bool User::Register(std::string username, std::string password, std::string firs
         return false;
     }
 
+    // Set user object's values
+    username = inUsername;
+    password = inPassword;
+    firstName = inFirstName;
+    lastName = inLastName;
+    shippingAddress = inShippingAddress;
+    paymentInfo = inPaymentInfo;
+    loggedIn = true;
+
     // Write to file
     userFileW << "user:" << username;
     userFileW << ":password:" << password;
@@ -145,15 +205,6 @@ bool User::Register(std::string username, std::string password, std::string firs
     userFileW << ":cartID:" << " " << '\n';
 
     userFileW.close();
-
-    // Set user object's values
-    username = username;
-    password = password;
-    firstName = firstName;
-    lastName = lastName;
-    shippingAddress = shippingAddress;
-    paymentInfo = paymentInfo;
-    loggedIn = true;
     return true;
 }
 
@@ -245,6 +296,36 @@ bool User::DeleteUser() {
     std::cout << username;
     userFileW << contents;
     userFileW.close();
+
+    return true;
+}
+
+bool User::EditShipping(std::string inShipping) {
+    if(!loggedIn) {
+        OutStream << "Edit Shipping Failed: Must be logged in!\n";
+        return false;
+    }
+
+    shippingAddress = inShipping;
+
+    if(!UpdateUserToFile()) {
+        std::cout << "Failed Editing Shipping: Could not update to user file!\n";
+        return false;
+    }
+    return true;
+}
+
+bool User::EditPayment(std::string inPaymentInfo) {
+    if(!loggedIn) {
+        OutStream << "Edit Payment Failed: Must be logged in!\n";
+        return false;
+    }
+
+    paymentInfo = inPaymentInfo;
+    if(!UpdateUserToFile()) {
+        OutStream << "Failed Editing Payment: Could not update to user file!\n";
+        return false;
+    }
 
     return true;
 }
