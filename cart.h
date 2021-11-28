@@ -7,23 +7,24 @@
 #pragma once
 #include <vector>
 #include <string>
+#include "history.h"
 
 using std::string;
 using std::vector;
 
-struct itemInfo
-{
-  string id;
-  int quantity;
-};
+
 
 class Cart
 {
 private:
     string username;
-    vector<itemInfo> items;
+    vector<string> items;
+    vector<int> quantity;
+
 
 public:
+
+
     Cart(string username);
 
     void viewCart();
@@ -32,5 +33,7 @@ public:
     bool removeItem(string id);
 
     bool checkout();
+
+
 
 };

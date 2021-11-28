@@ -1,15 +1,19 @@
 #pragma once
 #include "cart.h"
+
+using std::string;
+using std::vector;
+
 class History
 {
 private:
     string user;
-    std::vector<std::string> items_ids;
-    int quantities;
+    vector<string> items_ids;
+    vector<int> quantities;
     string file_name;
 
 public:
-    History(string username, std::vector<std::string>);
+    History(string username, vector<string> items, vector<int> quantities);
 
     void Display();
     void DeleteHistory();

@@ -31,9 +31,12 @@ bool Cart::addItem(string id, int quantity)
 
   //if item is in inventory, add to shopping cart
   //for testing, just add id into cart
+
+
   for(int i = quantity; i > 0; i--)
   {
     items.push_back(id);
+    this->quantity.push_back(quantity);
   }
 
   return true;
@@ -63,7 +66,8 @@ bool Cart::checkout()
     //DecrementStock(items[i], 1);
   }
     //add items to user history
-
+  History history(username, items, quantity);
+  items.clear();
 
   return true;
 }
