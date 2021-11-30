@@ -22,24 +22,37 @@ void Cart::viewCart()
   cout << "Shopping Cart Items: " << endl;
   for(int i = 0; i < items.size(); i++)
   {
-    cout << items[i] << endl;
+    cout << "item id: " << items[i] << " quantity: " << quantity[i] << endl;
   }
 }
 
 bool Cart::addItem(string id, int quantity)
 {
-
-  //if item is in inventory, add to shopping cart
-  //for testing, just add id into cart
+  //todo: check if item is in inventory and quantity available
 
 
-  for(int i = quantity; i > 0; i--)
-  {
-    items.push_back(id);
-    this->quantity.push_back(quantity);
-  }
+  items.push_back(id);
+  this->quantity.push_back(quantity);
+
 
   return true;
+}
+
+bool Cart::changeQuantity(string id, int quantity)
+{
+  //check if item is in Cart
+  for(int i = 0; i < items.size(); i++)
+  {
+    if(items[i] == id)
+    {
+      //todo: check if quantity desired is available
+      //change item quantity
+      this->quantity[i] = quantity;
+      return true;
+    }
+  }
+  return false;
+
 }
 
 
@@ -63,7 +76,7 @@ bool Cart::checkout()
 
   for(int i = 0; i < items.size(); i++)
   {
-    //DecrementStock(items[i], 1);
+    //DecrementStock(items[i], quantity[i]);
   }
     //add items to user history
   History history(username, items, quantity);

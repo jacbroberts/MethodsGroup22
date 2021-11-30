@@ -29,7 +29,8 @@ public:
 
     void viewCart();
 
-    bool addItem(string id, int quantity);
+    bool addItem(string id, int quantity = 1);
+    bool changeQuantity(string id, int quantity);
     bool removeItem(string id);
 
     bool checkout();

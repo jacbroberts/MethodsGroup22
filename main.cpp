@@ -13,8 +13,8 @@ int main()
     if (answer == "no")
      {
         string b;
-        cout<<"Would you like to create an account? ";
-        cin>>b;
+        cout << "Would you like to create an account? ";
+        cin >> b;
         if (b == "no")
         {
          cout<<"Goodbye.";
@@ -22,18 +22,63 @@ int main()
         }
         if (b == "yes")
         {
-        string username;
-        cout<<"Splendid!\n";
-        cout<<"Enter new username: ";
-        cin>>username;
-        Cart cart(username);
-        cart.addItem("black shirt, medium", 2);
-        cart.addItem("white shirt, large", 2);
+          string username;
 
-        cart.removeItem("black shirt, medium");
-        cart.viewCart();
+          cout<<"Splendid!\n";
+          cout<<"Enter new username: ";
+          cin>>username;
 
-        cart.checkout();
+          Cart cart(username);
+          History userHistory(username);
+
+          string choice;
+          while(true)
+            {
+              cout << "Enter Action: ";
+              cin >> choice;
+              if(choice == "add")
+              {
+                string id;
+                int quantity;
+                cout << "Enter id: ";
+                cin.ignore();
+                getline(cin, id);
+                cout << "Enter quantity: ";
+                cin >> quantity;
+                cout << endl;
+                cart.addItem(id, quantity);
+
+              }
+              if(choice == "remove")
+              {
+
+              }
+              if(choice == "viewcart")
+              {
+                cart.viewCart();
+              }
+              if(choice == "viewhistory")
+              {
+                userHistory.Display();
+              }
+              if(choice == "checkout")
+              {
+                cart.checkout();
+              }
+              if(choice == "changequantity")
+              {
+                string id;
+                int quantity;
+                cout << "Enter id: ";
+                cin.ignore();
+                getline(cin, id);
+                cout << "Quantity desired: ";
+                cin >> quantity;
+                cart.changeQuantity(id, quantity);
+              }
+            }
+
+
         }
      }
     // rt: Yes I do have an account
