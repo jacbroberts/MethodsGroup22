@@ -19,7 +19,14 @@ Cart::Cart(string username)
 
 void Cart::viewCart()
 {
-  cout << "Shopping Cart Items: " << endl;
+  if(items.size() == 0)
+  {
+    cout << "Shopping Cart Empty" << endl;
+  }
+  else
+  {
+    cout << "Shopping Cart Items: " << endl;
+  }
   for(int i = 0; i < items.size(); i++)
   {
     cout << "item id: " << items[i] << " quantity: " << quantity[i] << endl;
