@@ -32,22 +32,28 @@ int main()
   string answer;
   int cont;
   int conttwo;
-  cout<<"##############################################";
-  cout<<"\nHello! Welcome to our T-shirt shop.\n\n";
-  cout<<"We only have T-shirts and the best T-shirts.\n\n";
-  cout<<"Enter: EXIT\n";
-  cout<<"To leave the site anytime\n\n";
-  cout<<"Enter: BACK\n";
-  cout<<"To go back a page anytime\n\n";
-  cout<<"Do you have an account with us(y/n)? ";
-  cin>>answer;
+  while(answer != "y" && answer != "n")
+   {
+    cout<<"##############################################";
+    cout<<"\nHello! Welcome to our T-shirt shop.\n\n";
+    cout<<"We only have T-shirts and the best T-shirts.\n\n";
+    cout<<"Enter: EXIT\n";
+    cout<<"To leave the site anytime\n\n";
+    cout<<"Enter: BACK\n";
+    cout<<"To go back a page anytime\n\n";
+    cout<<"Do you have an account with us(y/n)? ";
+    cin>>answer;
+   }   
     // rt: No, I do NOT have an account
     if (answer == "n")
      {
         string b;
-        cout<<"\nYou must have an account to proceed.\n";
-        cout<<"Would you like to create an account(y/n)? ";
-        cin>>b;
+        while(b != "y" && b != "n")
+         {
+            cout<<"\nYou must have an account to proceed.\n";
+            cout<<"Would you like to create an account(y/n)? ";
+            cin>>b;
+         }
         // rt: if no i dont want to create an account
         if (b == "n")
          {
@@ -95,202 +101,191 @@ int main()
         conttwo = 1;
         while(conttwo == 1)
          {
-        // rt: Welcome user what you wanna do
-        string MainMenuOption;
-        cout<<"##############################################";
-        cout<<"\nWelcome! What would you like to do?\n\n";
-        cout<<"Enter: ACCOUNTINFO\n";
-        cout<<"To see information about your account\n\n";
-        cout<<"Enter: CART\n";
-        cout<<"To see your carts info\n\n";
-        cout<<"Enter: INVENTORY\n";
-        cout<<"To browse our inventory\n\n";
-        cout<<"Enter a option: ";
-        cin>>MainMenuOption;
-        cout<<"\n";
+            string MainMenuOption;
+            while(MainMenuOption != "ACCOUNTINFO" && MainMenuOption != "CART" && MainMenuOption != "INVENTORY" && MainMenuOption != "EXIT")
+             {
+                // rt: Welcome user what you wanna do
+                cout<<"##############################################";
+                cout<<"\nWelcome! What would you like to do?\n\n";
+                cout<<"Enter: ACCOUNTINFO\n";
+                cout<<"To see information about your account\n\n";
+                cout<<"Enter: CART\n";
+                cout<<"To see your carts info\n\n";
+                cout<<"Enter: INVENTORY\n";
+                cout<<"To browse our inventory\n\n";
+                cout<<"Select an option: ";
+                cin>>MainMenuOption;
+                cout<<"\n";
 
-        // rt: ACCOUNTINFO
-        if (MainMenuOption == "ACCOUNTINFO")
-        {
-        string AccountInfoOption;
-        cout<<"##############################################";
-        cout<<"This is where you can see information about your account\n\n";
-        cout<<"Enter: DETAILS\n";
-        cout<<"To see your account\n\n";
-        cout<<"Enter: VIEWSHIPPING\n";
-        cout<<"To see your shipping information\n\n";
-        cout<<"Enter: EDITSHIPPING\n";
-        cout<<"To edit your shipping information\n\n";
-        cout<<"Enter: VIEWPAYINFO\n";
-        cout<<"To see your payment information\n\n";
-        cout<<"Enter: EDITPAYINFO\n";
-        cout<<"To edit your payment information\n\n";
-        cout<<"Enter: HISTORY\n";
-        cout<<"To view order history\n\n";
-        cout<<"Enter: LOGOUT\n";
-        cout<<"To logout of your account\n";
-        cout<<"Enter: DELETE\n";
-        cout<<"To delete you account\n\n";
-        cout<<"Enter a option: ";
-        cin>>AccountInfoOption;
+                // rt: ACCOUNTINFO
+                if (MainMenuOption == "ACCOUNTINFO")
+                {
+                string AccountInfoOption;
+                while(AccountInfoOption != "DETAILS" && AccountInfoOption != "VIEWSHIPPING" && AccountInfoOption != "EDITSHIPPING" && AccountInfoOption != "VIEWPAYINFO" && AccountInfoOption != "EDITPAYINFO" && AccountInfoOption != "HISTORY" && AccountInfoOption != "LOGOUT" && AccountInfoOption != "DELETE" && AccountInfoOption != "EXIT")
+                {
+                    cout<<"##############################################";
+                    cout<<"\nThis is where you can see information about your account\n\n";
+                    cout<<"Enter: DETAILS\n";
+                    cout<<"To see your account\n\n";
+                    cout<<"Enter: VIEWSHIPPING\n";
+                    cout<<"To see your shipping information\n\n";
+                    cout<<"Enter: EDITSHIPPING\n";
+                    cout<<"To edit your shipping information\n\n";
+                    cout<<"Enter: VIEWPAYINFO\n";
+                    cout<<"To see your payment information\n\n";
+                    cout<<"Enter: EDITPAYINFO\n";
+                    cout<<"To edit your payment information\n\n";
+                    cout<<"Enter: HISTORY\n";
+                    cout<<"To view order history\n\n";
+                    cout<<"Enter: LOGOUT\n";
+                    cout<<"To logout of your account\n";
+                    cout<<"Enter: DELETE\n";
+                    cout<<"To delete you account\n\n";
+                    cout<<"Select an option: ";
+                    cin>>AccountInfoOption;
 
-        // rt: go to details function
-        if (AccountInfoOption == "DETAILS")
-            {
+                    // rt: go to details function
+                    if (AccountInfoOption == "DETAILS")
+                        {
 
-            }
-            
-        // rt: go to viewshipping information function
-        if (AccountInfoOption == "VIEWSHIPPING")
-            {
+                        }
+                        
+                    // rt: go to viewshipping information function
+                    if (AccountInfoOption == "VIEWSHIPPING")
+                        {
 
-            }
-            
-        // rt: go to edit shipping information function
-        if (AccountInfoOption == "EDITSHIPPING")
-            {
+                        }
+                        
+                    // rt: go to edit shipping information function
+                    if (AccountInfoOption == "EDITSHIPPING")
+                        {
 
-            }
+                        }
 
-        // rt: go to view payment information function
-        if (AccountInfoOption == "VIEWPAYINFO")
-            {
+                    // rt: go to view payment information function
+                    if (AccountInfoOption == "VIEWPAYINFO")
+                        {
 
-            }
+                        }
 
-        // rt: go to edit payment information function
-        if (AccountInfoOption == "EDITPAYINFO")
-            {
+                    // rt: go to edit payment information function
+                    if (AccountInfoOption == "EDITPAYINFO")
+                        {
 
-            }
+                        }
 
-        // rt: go to history function
-        if (AccountInfoOption == "HISTORY")
-            {
+                    // rt: go to history function
+                    if (AccountInfoOption == "HISTORY")
+                        {
 
-            }
-            
-        // rt: go to logout function
-        // rt: basically back to welcome? or just exit?      
-        if (AccountInfoOption == "LOGOUT")
-            {
+                        }
+                        
+                    // rt: go to logout function
+                    // rt: basically back to welcome? or just exit?      
+                    if (AccountInfoOption == "LOGOUT")
+                        {
 
-            }
-            
-        // rt: go to delete account function
-        if (AccountInfoOption == "DELETE")
-            {
+                        }
+                        
+                    // rt: go to delete account function
+                    if (AccountInfoOption == "DELETE")
+                        {
 
-            }
+                        }
 
-        // rt: EXIT
-        if(AccountInfoOption == "EXIT"){goodbye();}
+                    // rt: EXIT
+                    if(AccountInfoOption == "EXIT"){goodbye();}
 
-        }
+                    }
+                }
+                // rt: CART
+                if (MainMenuOption == "CART")
+                {
+                string CartOption;
+                while(CartOption != "CART" && CartOption != "REMOVEITEM" && CartOption != "ADDITEM" && CartOption != "QUANTITY" && CartOption != "CHECKOUT" && CartOption != "EXIT")
+                 {
+                    cout<<"##############################################";
+                    cout<<"\nThis is where you can see information about your cart\n\n";
+                    cout<<"Enter: CART\n";
+                    cout<<"To view your cart\n\n";
+                    cout<<"Enter: REMOVEITEM\n";
+                    cout<<"To remove an item from your cart\n\n";
+                    cout<<"Enter: ADDITEM\n";
+                    cout<<"To add an item to your cart\n\n";
+                    cout<<"Enter: QUANTITY\n";
+                    cout<<"To specify how much of an item to add\n\n";
+                    cout<<"Enter: CHECKOUT\n";
+                    cout<<"To complete purchase\n\n";
+                    cout<<"Select an option: ";
+                    cin>>CartOption;
+
+                    // rt: go to view cart function
+                    if (CartOption == "CART")
+                        {
+
+                        }
+                        
+                    // rt: go to remove an item function
+                    if (CartOption == "REMOVEITEM")
+                        {
+
+                        }
+                        
+                    // rt: go to add an item function
+                    if (CartOption == "ADDITEM")
+                        {
+
+                        }
+
+                    // rt: go to quantity function
+                    if (CartOption == "QUANTITY")
+                        {
+
+                        }
+
+                    // rt: go to edit checkout function
+                    if (CartOption == "CHECKOUT")
+                        {
+
+                        }
+
+                    // rt: EXIT
+                    if(CartOption == "EXIT"){goodbye();}
+                 }
+                }
+                
+                // rt: INVENTORY
+                if (MainMenuOption == "INVENTORY")
+                {
+                string InvOption;
+                while(InvOption != "DISPLAY" && InvOption != "EXIT")
+                 {
+                    cout<<"##############################################";
+                    cout<<"\nThis is where you can browse our inventory\n\n";
+                    cout<<"Enter: DISPLAY\n";
+                    cout<<"To see all of our stock\n\n";
+                    cout<<"Select an option: ";
+
+                    cin>>InvOption;
+
+                    // rt: go to view entire inventory function
+                    if (InvOption == "DISPLAY")
+                        {
+
+                        }
         
-        // rt: CART
-        if (MainMenuOption == "CART")
-        {
-        string CartOption;
-        cout<<"##############################################";
-        cout<<"\nThis is where you can see information about your cart\n\n";
-        cout<<"Enter: CART\n";
-        cout<<"To view your cart\n\n";
-        cout<<"Enter: REMOVEITEM\n";
-        cout<<"To remove an item from your cart\n\n";
-        cout<<"Enter: ADDITEM\n";
-        cout<<"To add an item to your cart\n\n";
-        cout<<"Enter: QUANTITY\n";
-        cout<<"To specify how much of an item to add\n\n";
-        cout<<"Enter: CHECKOUT\n";
-        cout<<"To complete purchase\n\n";
-        cout<<"Enter a option: ";
-        cin>>CartOption;
 
-        // rt: go to view cart function
-        if (CartOption == "CART")
-            {
+                    // rt: BACK
+                    if(InvOption == "BACK"){}
 
+                    // rt: EXIT
+                    if(InvOption == "EXIT"){goodbye();}
+                 }
+                }
+                
+                // rt: EXIT
+                if (MainMenuOption == "EXIT") {goodbye();}
             }
-            
-        // rt: go to remove an item function
-        if (CartOption == "REMOVEITEM")
-            {
-
-            }
-            
-        // rt: go to add an item function
-        if (CartOption == "ADDITEM")
-            {
-
-            }
-
-        // rt: go to quantity function
-        if (CartOption == "QUANTITY")
-            {
-
-            }
-
-        // rt: go to edit checkout function
-        if (CartOption == "CHECKOUT")
-            {
-
-            }
-
-        // rt: EXIT
-        if(CartOption == "EXIT"){goodbye();}
-
-        }
-        
-        // rt: INVENTORY
-        if (MainMenuOption == "INVENTORY")
-        {
-        string InvOption;
-        cout<<"##############################################";
-        cout<<"\nThis is where you can browse our inventory\n\n";
-        cout<<"Enter: DISPLAY\n";
-        cout<<"To see all of our stock\n\n";
-        cout<<"Enter: DISPLAYBRAND <BrandName>\n";
-        cout<<"To see all of our stock of a certain brand and the amount available\n\n";
-        cout<<"Enter: DISPLAYTYPE\n";
-        cout<<"To see items of a certain color and their amount in inventory\n\n";
-        cout<<"Enter: DISPLAYITEM\n";
-        cout<<"To see an item and how many are in stock\n\n";
-        cout<<"Enter a option: ";
-
-        cin>>InvOption;
-
-        // rt: go to view entire inventory function
-        if (InvOption == "DISPLAY")
-            {
-
-            }
-            
-        // rt: go to specifiy a brand function
-        if (InvOption == "DISPLAYBRAND")
-            {
-
-            }
-            
-        // rt: go to a certain color function
-        if (InvOption == "DISPLAYTYPE")
-            {
-
-            }
-
-        // rt: go to certain item function
-        if (InvOption == "DISPLAYITEM")
-            {
-
-            }
-
-        // rt: EXIT
-        if(InvOption == "EXIT"){goodbye();}
-
-        }
-        
-        // rt: EXIT
-        if (MainMenuOption == "EXIT") {goodbye();}
          }
     }
     return 0;
