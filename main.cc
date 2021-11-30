@@ -193,6 +193,9 @@ int main()
 
                         }
 
+                    // rt: BACK
+                    if(AccountInfoOption == "BACK"){}
+
                     // rt: EXIT
                     if(AccountInfoOption == "EXIT"){goodbye();}
 
@@ -248,6 +251,9 @@ int main()
                         {
 
                         }
+
+                    // rt: BACK
+                    if(CartOption == "BACK"){}
 
                     // rt: EXIT
                     if(CartOption == "EXIT"){goodbye();}
