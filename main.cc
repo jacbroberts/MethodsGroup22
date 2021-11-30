@@ -31,6 +31,7 @@ int main()
   // rt: Welcome
   string answer;
   int cont;
+  int conttwo;
   cout<<"##############################################";
   cout<<"\nHello! Welcome to our T-shirt shop.\n\n";
   cout<<"We only have T-shirts and the best T-shirts.\n\n";
@@ -91,6 +92,9 @@ int main()
     
     if ( cont == 1)
     {
+        conttwo = 1;
+        while(conttwo == 1)
+         {
         // rt: Welcome user what you wanna do
         string MainMenuOption;
         cout<<"##############################################";
@@ -110,7 +114,7 @@ int main()
         {
         string AccountInfoOption;
         cout<<"##############################################";
-        cout<<"\nThis is where you can see information about your account\n\n";
+        cout<<"This is where you can see information about your account\n\n";
         cout<<"Enter: DETAILS\n";
         cout<<"To see your account\n\n";
         cout<<"Enter: VIEWSHIPPING\n";
@@ -287,7 +291,7 @@ int main()
         
         // rt: EXIT
         if (MainMenuOption == "EXIT") {goodbye();}
-
+         }
     }
     return 0;
  }
