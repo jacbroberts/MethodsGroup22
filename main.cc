@@ -115,43 +115,50 @@ int main()
        cout<<"To delete you account";
        cin>>AccountInfoOption;
 
+       // rt: go to details function
        if (AccountInfoOption == "DETAILS")
         {
-         // rt: go to details function
-        }
 
-       if (AccountInfoOption == "VIEWSHIPPING")
-        {
-         // rt: go to viewshipping information function
-        }
-       
-       if (AccountInfoOption == "EDITSHIPPING")
-        {
-         // rt: go to edit shipping information function
-        }
-
-       if (AccountInfoOption == "VIEWPAYINFO")
-        {
-         // rt: go to view payment information function
-        }
-
-       if (AccountInfoOption == "EDITPAYINFO")
-        {
-         // rt: go to edit payment information function
-        }
-
-       if (AccountInfoOption == "HISTORY")
-        {
-         // rt: go to history function
-        }
-       
-       if (AccountInfoOption == "LOGOUT")
-        {
-         // rt: go to logout function
-         // rt: basically back to welcome? or just exit?
         }
         
-        // rt: go to delete account function
+       // rt: go to viewshipping information function
+       if (AccountInfoOption == "VIEWSHIPPING")
+        {
+
+        }
+        
+       // rt: go to edit shipping information function
+       if (AccountInfoOption == "EDITSHIPPING")
+        {
+
+        }
+
+       // rt: go to view payment information function
+       if (AccountInfoOption == "VIEWPAYINFO")
+        {
+
+        }
+
+       // rt: go to edit payment information function
+       if (AccountInfoOption == "EDITPAYINFO")
+        {
+
+        }
+
+       // rt: go to history function
+       if (AccountInfoOption == "HISTORY")
+        {
+
+        }
+        
+       // rt: go to logout function
+       // rt: basically back to welcome? or just exit?      
+       if (AccountInfoOption == "LOGOUT")
+        {
+
+        }
+        
+       // rt: go to delete account function
        if (AccountInfoOption == "DELETE")
         {
 
