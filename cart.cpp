@@ -30,9 +30,23 @@ bool Cart::addItem(string id, int quantity)
 {
   //todo: check if item is in inventory and quantity available
 
+  //jr: check if item is already in cart, if so, add quantity to current Quantity
+  bool itemInInventory;
+  for(int i = 0; i < items.size(); i++)
+  {
+    if(items[i] == id)
+    {
+      this->quantity[i] += quantity; //jr: increases quantity in inventory by amount given
+      itemInInventory = true;
+    }
+  }
 
-  items.push_back(id);
-  this->quantity.push_back(quantity);
+  //if item is not in cart, add to cart with given quantity
+  if (!itemInInventory)
+  {
+    items.push_back(id);
+    this->quantity.push_back(quantity);
+  }
 
 
   return true;
@@ -46,7 +60,8 @@ bool Cart::changeQuantity(string id, int quantity)
     if(items[i] == id)
     {
       //todo: check if quantity desired is available
-      //change item quantity
+
+      //jr: change item quantity
       this->quantity[i] = quantity;
       return true;
     }
@@ -64,6 +79,7 @@ bool Cart::removeItem(string id)
     if(items[i] == id)
     {
       items.erase(items.begin() + i);
+      quantity.erase(quantity.begin() + i);
     }
   }
   return true;
@@ -71,15 +87,14 @@ bool Cart::removeItem(string id)
 
 bool Cart::checkout()
 {
-  //checkout items in cart:
-    //decrement items in inventory
-
   for(int i = 0; i < items.size(); i++)
   {
+    //jr: decrement the items in inventory by given amount
     //DecrementStock(items[i], quantity[i]);
   }
-    //add items to user history
+  //jr: add items to user history
   History history(username, items, quantity);
+  //jr: remove items from User's Cart
   items.clear();
 
   return true;

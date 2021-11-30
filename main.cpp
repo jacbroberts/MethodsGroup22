@@ -51,7 +51,12 @@ int main()
               }
               if(choice == "remove")
               {
-
+                string id;
+                cout << "Enter id: ";
+                cin.ignore();
+                getline(cin, id);
+                cart.removeItem(id);
+                cout << "Item removed from Cart" << endl;
               }
               if(choice == "viewcart")
               {
