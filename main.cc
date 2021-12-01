@@ -33,7 +33,7 @@ void Login(Cart& userCart, History& userHistory)
 
     //jar: initializing cart and history
     userCart.setUsername(LoginUsername);
-    userHistory.setUser(LoginUsername);
+    userHistory.setUsername(LoginUsername);
 }
 
 int main()

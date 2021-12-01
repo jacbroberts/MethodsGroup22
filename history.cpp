@@ -9,10 +9,16 @@ using std::ofstream;
 using std::cout;
 using std::endl;
 
-History::History(string username, vector<Inventory> items, vector<int> quantity)
+History::History()
+{
+  username = "";
+  file_name = "";
+}
+
+History::History(string user, vector<Inventory> items, vector<int> quantity)
 {
   //initializes values
-  user = username;
+  username = user;
   file_name = "History_" + username + ".txt";
   quantities = quantity;
 
@@ -35,15 +41,15 @@ History::History(string username, vector<Inventory> items, vector<int> quantity)
   }
 }
 
-History::History(string username)
+History::History(string user)
 {
-  user = username;
+  username = user;
   file_name = "History_" + username + ".txt";
 }
 
-void History::setUser(string username)
+void History::setUsername(string user)
 {
-  user = username;
+  username = user;
   file_name = "History_" + username + ".txt";
 }
 

@@ -8,21 +8,17 @@ using std::vector;
 class History
 {
 private:
-    string user;
+    string username;
     vector<string> items_ids;
     vector<int> quantities;
     string file_name;
 
 public:
-    History()
-    {
-      user = "";
-      file_name = "";
-    }
-    History(string username);
-    History(string username, vector<Inventory> items, vector<int> quantities);
+    History();
+    History(string user);
+    History(string user, vector<Inventory> items, vector<int> quantities);
 
-    void setUser(string username);
+    void setUsername(string user);
 
     void Display();
     void DeleteHistory();

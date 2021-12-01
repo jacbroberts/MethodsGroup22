@@ -11,6 +11,11 @@
 using std::cout;
 using std::endl;
 
+Cart::Cart()
+{
+  username = "";
+}
+
 Cart::Cart(string username)
 {
   this->username = username;

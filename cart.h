@@ -25,20 +25,15 @@ private:
 
 public:
 
-    Cart()
-    {
-      username = "";
-    }
+    Cart();
     Cart(string username);
 
     void setUsername(string username);
 
     void viewCart();
-
     bool addItem(Inventory item, int quantity = 1);
     bool changeQuantity(Inventory item, int quantity);
     bool removeItem(Inventory item);
-
     bool checkout();
 
 
