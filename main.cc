@@ -232,7 +232,7 @@ int main()
                         cout << "To delete you account\n\n";
                         cout << "Select an option: ";
                         cin >> AccountInfoOption;
-
+                        cout << "\n";
                         // rt: go to details function
                         if (AccountInfoOption == "DETAILS")
                         {
@@ -367,6 +367,7 @@ int main()
                         cout << "To complete purchase\n\n";
                         cout << "Select an option: ";
                         cin >> CartOption;
+                        cout << "\n";
 
                         // rt: go to view cart function
                         if (CartOption == "CART")
@@ -410,35 +411,42 @@ int main()
                 if (MainMenuOption == "INVENTORY")
                 {
                     string InvOption;
-                    cout << "##############################################";
-                    cout << "\nThis is where you can browse our inventory\n\n";
-                    cout << "We carry Gucci, Walmart Brand, and Hail State merch\n";
-                    cout << "Which brand would you like view? (Enter: GUCCI, WALMART, or HAIL STATE) \n";
-                    cout << "Enter a option: ";
-
-                    cin >> InvOption;
-
-                    // jdr: view price and stock of Gucci
-                    if (InvOption == "GUCCI")
+                    while(InvOption != "BACK")
                     {
-                        cout << Gucci.GetBrand() << ":   In Stock: " << Gucci.GetCount() << "   Price: $" << Gucci.GetPrice() << endl;
+                        cout << "\n##############################################";
+                        cout << "\nThis is where you can browse our inventory\n\n";
+                        cout << "We carry Gucci, Walmart Brand, and Hail State merch\n";
+                        cout << "Which brand would you like view? (Enter: GUCCI, WALMART, or HAILSTATE) \n";
+                        cout << "Select an option: ";
+
+                        cin >> InvOption;
+
+                        cout << "\n";
+                        // jdr: view price and stock of Gucci
+                        if (InvOption == "GUCCI")
+                        {
+                            cout << Gucci.GetBrand() << ":   In Stock: " << Gucci.GetCount() << "   Price: $" << Gucci.GetPrice() << endl;
+                        }
+
+                        // jdr: view price and stock of Walmart
+                        if (InvOption == "WALMART")
+                        {
+                            cout << Walmart.GetBrand() << ":   In Stock: " << Walmart.GetCount() << "   Price: $" << Walmart.GetPrice() << endl;
+                        }
+
+                        // jdr: view price and stock of State
+                        if (InvOption == "HAILSTATE")
+                        {
+                            cout << State.GetBrand() << ":   In Stock: " << State.GetCount() << "   Price: $" << State.GetPrice() << endl;
+                        }
+                        
+                        // rt: BACK
+                        if (InvOption == "BACK") {}
+                        
+                        // rt: EXIT
+                        if (InvOption == "EXIT") { goodbye(); }
+
                     }
-
-                    // jdr: view price and stock of Walmart
-                    if (InvOption == "WALMART")
-                    {
-                        cout << Walmart.GetBrand() << ":   In Stock: " << Walmart.GetCount() << "   Price: $" << Walmart.GetPrice() << endl;
-                    }
-
-                    // jdr: view price and stock of State
-                    if (InvOption == "HAIL STATE")
-                    {
-                        cout << State.GetBrand() << ":   In Stock: " << State.GetCount() << "   Price: $" << State.GetPrice() << endl;
-                    }
-
-                    // rt: EXIT
-                    if (InvOption == "EXIT") { goodbye(); }
-
                 }
 
                 // rt: EXIT
