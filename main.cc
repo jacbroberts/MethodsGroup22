@@ -1,9 +1,10 @@
 #include <iostream>
+#include <fstream>
 #include <stdlib.h>
-#include <"inventory.h">
-#include <"history.h">
-#include <"cart.h">
-#include <"user.h">
+#include "inventory.h"
+#include "history.h"
+#include "cart.h"
+#include "user.h"
 
 using namespace std;
 
@@ -321,19 +322,19 @@ int main()
                     // jdr: view price and stock of Gucci
                     if (InvOption == "GUCCI")
                     {
-                        cout << Gucci.GetBrand() << ":   In Stock: " << Gucci.GetCount << "   Price: $" << Gucci.GetPrice << endl;
+                        cout << Gucci.GetBrand() << ":   In Stock: " << Gucci.GetCount() << "   Price: $" << Gucci.GetPrice() << endl;
                     }
 
                     // jdr: view price and stock of Walmart
                     if (InvOption == "WALMART")
                     {
-                        cout << Walmart.GetBrand() << ":   In Stock: " << Walmart.GetCount << "   Price: $" << Walmart.GetPrice << endl;
+                        cout << Walmart.GetBrand() << ":   In Stock: " << Walmart.GetCount() << "   Price: $" << Walmart.GetPrice() << endl;
                     }
 
                     // jdr: view price and stock of State
                     if (InvOption == "HAIL STATE")
                     {
-                        cout << State.GetBrand() << ":   In Stock: " << State.GetCount << "   Price: $" << State.GetPrice << endl;
+                        cout << State.GetBrand() << ":   In Stock: " << State.GetCount() << "   Price: $" << State.GetPrice() << endl;
                     }
 
                     // rt: EXIT
