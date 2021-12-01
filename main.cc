@@ -1,5 +1,9 @@
 #include <iostream>
 #include <stdlib.h>
+#include <inventory.h>
+#include <history.h>
+#include <cart.h>
+#include <user.h>
 
 using namespace std;
 
