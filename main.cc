@@ -14,7 +14,7 @@ void goodbye()
     exit(EXIT_FAILURE);
 }
 
-void Login(User &user)
+bool Login(User &user)
 {
     string LoginUsername;
     string LoginPassword;
@@ -33,10 +33,14 @@ void Login(User &user)
     if(user.Login(LoginUsername, LoginPassword)) 
     {
         cout << "Successfully logged in as " << LoginUsername << '\n';
+        return true;
+    }
+    else {
+        return false;
     }
 }
 
-void Register(User &user) 
+bool Register(User &user) 
 {
     string username, password, firstname, lastname, shipping, payment;
 
@@ -58,6 +62,10 @@ void Register(User &user)
     if(user.Register(username, password, firstname, lastname, shipping, payment))
     {
         cout << "Successfully created new user!\n";
+        return true;
+    }
+    else {
+        return false;
     }
 }
 
@@ -106,71 +114,70 @@ int main()
     }
 
     // rt: Welcome
-    User user;
-    string answer;
-    int cont;
-    int conttwo;
-    while (answer != "y" && answer != "n")
-    {
-        cout << "##############################################";
-        cout << "\nHello! Welcome to our T-shirt shop.\n\n";
-        cout << "We only have T-shirts and the best T-shirts.\n\n";
-        cout << "Enter: EXIT\n";
-        cout << "To leave the site anytime\n\n";
-        cout << "Enter: BACK\n";
-        cout << "To go back a page anytime\n\n";
-        cout << "Do you have an account with us(y/n)? ";
-        cin >> answer;
-    }
-    // rt: No, I do NOT have an account
-    if (answer == "n")
-    {
-        string b;
-        while (b != "y" && b != "n")
+    while(true) {
+        User user;
+        string answer;
+        int cont;
+        int conttwo;
+        while (answer != "y" && answer != "n")
         {
-            cout << "\nYou must have an account to proceed.\n";
-            cout << "Would you like to create an account(y/n)? ";
-            cin >> b;
+            cout << "##############################################";
+            cout << "\nHello! Welcome to our T-shirt shop.\n\n";
+            cout << "We only have T-shirts and the best T-shirts.\n\n";
+            cout << "Enter: EXIT\n";
+            cout << "To leave the site anytime\n\n";
+            cout << "Enter: BACK\n";
+            cout << "To go back a page anytime\n\n";
+            cout << "Do you have an account with us(y/n)? ";
+            cin >> answer;
         }
-        // rt: if no i dont want to create an account
-        if (b == "n")
+        // rt: No, I do NOT have an account
+        if (answer == "n")
         {
-            cout << "\nYou must have an account to proceed.\n";
-            goodbye();
-        }
-        // rt: if yes i do want to create an account
-        if (b == "y")
-        {
-            // rt: Create username
-            string username;
-            cout << "Great, let's make a new account.\n";
+            string b;
+            while (b != "y" && b != "n")
+            {
+                cout << "\nYou must have an account to proceed.\n";
+                cout << "Would you like to create an account(y/n)? ";
+                cin >> b;
+            }
+            // rt: if no i dont want to create an account
+            if (b == "n")
+            {
+                cout << "\nYou must have an account to proceed.\n";
+                goodbye();
+            }
+            // rt: if yes i do want to create an account
+            if (b == "y")
+            {
+                // rt: Create username
+                string username;
+                cout << "Great, let's make a new account.\n";
 
-            // rt: move to login
-            //Login();
-            Register(user);
-            cont = 1;
+                // rt: move to login
+                if(Register(user))
+                    cont = 1;
+            }
+            // rt: EXIT
+            if (b == "EXIT") { goodbye(); }
         }
+
+        // rt: Yes I do have an account
+        if (answer == "y")
+        {
+            if(Login(user))
+                cont = 1;
+        }
+
         // rt: EXIT
-        if (b == "EXIT") { goodbye(); }
-    }
+        if (answer == "EXIT") { goodbye(); }
 
-    // rt: Yes I do have an account
-    if (answer == "y")
-    {
-        Login(user);
-        cont = 1;
-    }
-
-    // rt: EXIT
-    if (answer == "EXIT") { goodbye(); }
-
-    if (cont == 1)
-    {
-        conttwo = 1;
-        while (conttwo == 1)
+        if (cont == 1)
         {
+            conttwo = 1;
             string MainMenuOption;
-            while (MainMenuOption != "ACCOUNTINFO" && MainMenuOption != "CART" && MainMenuOption != "INVENTORY" && MainMenuOption != "EXIT")
+            //while (MainMenuOption != "ACCOUNTINFO" && MainMenuOption != "CART" && MainMenuOption != "INVENTORY" && MainMenuOption != "EXIT")
+            while(MainMenuOption != "EXIT" && user.GetIsLoggedIn())
             {
                 // rt: Welcome user what you wanna do
                 cout << "##############################################";
@@ -189,7 +196,7 @@ int main()
                 if (MainMenuOption == "ACCOUNTINFO")
                 {
                     string AccountInfoOption;
-                    while (AccountInfoOption != "DETAILS" && AccountInfoOption != "VIEWSHIPPING" && AccountInfoOption != "EDITSHIPPING" && AccountInfoOption != "VIEWPAYINFO" && AccountInfoOption != "EDITPAYINFO" && AccountInfoOption != "HISTORY" && AccountInfoOption != "LOGOUT" && AccountInfoOption != "DELETE" && AccountInfoOption != "EXIT")
+                    while(AccountInfoOption != "BACK" && AccountInfoOption != "LOGOUT")
                     {
                         cout << "##############################################";
                         cout << "\nThis is where you can see information about your account\n\n";
@@ -253,7 +260,6 @@ int main()
                         if (AccountInfoOption == "LOGOUT")
                         {
                             user.Logout();
-                            AccountInfoOption = "BACK";
                         }
 
                         // rt: go to delete account function
@@ -274,7 +280,8 @@ int main()
                 if (MainMenuOption == "CART")
                 {
                     string CartOption;
-                    while (CartOption != "CART" && CartOption != "REMOVEITEM" && CartOption != "ADDITEM" && CartOption != "QUANTITY" && CartOption != "CHECKOUT" && CartOption != "EXIT")
+                    //while (CartOption != "CART" && CartOption != "REMOVEITEM" && CartOption != "ADDITEM" && CartOption != "QUANTITY" && CartOption != "CHECKOUT" && CartOption != "EXIT")
+                    while(CartOption != "BACK")
                     {
                         cout << "##############################################";
                         cout << "\nThis is where you can see information about your cart\n\n";
