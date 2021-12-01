@@ -154,19 +154,19 @@ bool User::Register(std::string inUsername, std::string inPassword, std::string 
     }
 
     // Verify username is valid
-    if(username.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
+    if(inUsername.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
         OutStream << "Registration failed: Invalid username!\n";
         return false;
     }
 
     // Verify password is valid
-    if(password.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
+    if(inPassword.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
         OutStream << "Registration failed: Invalid password!\n";
         return false;
     }
 
     // Check if user is in the file
-    bool userExists = GetUserExists(username);
+    bool userExists = GetUserExists(inUsername);
     if(userExists) {
         OutStream << "Registration failed: Username already taken!\n";
         return false;
