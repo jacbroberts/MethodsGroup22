@@ -222,13 +222,19 @@ int main()
                         // rt: go to details function
                         if (AccountInfoOption == "DETAILS")
                         {
-
+                            
                         }
 
                         // rt: go to viewshipping information function
                         if (AccountInfoOption == "VIEWSHIPPING")
                         {
-
+                            string shipping;
+                            if(user.GetShipping(shipping)) {
+                                std::cout << "Shipping Address: " << shipping << '\n';
+                            }
+                            else {
+                                cout << "There was an error getting the user shipping info!\n";
+                            }
                         }
 
                         // rt: go to edit shipping information function

@@ -324,3 +324,13 @@ bool User::EditPayment(std::string inPaymentInfo) {
 bool User::GetIsLoggedIn() const {
     return loggedIn;
 }
+
+bool User::GetShipping(std::string &outShipping) const {
+    if(loggedIn) {
+        outShipping = shippingAddress;
+        return true;
+    }
+    else {
+        return false;
+    }
+}
