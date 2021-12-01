@@ -241,7 +241,28 @@ int main()
                         // rt: go to edit shipping information function
                         if (AccountInfoOption == "EDITSHIPPING")
                         {
+                            bool edit = true;
+                            while(edit) { // Repeat until user confirms accuracy
+                                // Get shipping info
+                                string shipping;
+                                cout << "Enter new shipping address: ";
+                                cin.ignore(1, '\n'); // Ignore last endline value
+                                getline(cin, shipping);
 
+                                //Confirm shipping info
+                                string confirm;
+                                cout << "Is this information accurate?: ";
+                                cin >> confirm;
+                                if(confirm == "y" || confirm == "Y" || confirm == "Yes" || confirm == "YES" || confirm == "yes") { // Confirmed
+                                    if(user.EditShipping(shipping)) {
+                                        cout << "Updated shipping info.\n";
+                                    }
+                                    else {
+                                        cout << "An error occurred while updating shipping info! Going back...\n";
+                                    }
+                                    edit = false;
+                                }
+                            }
                         }
 
                         // rt: go to view payment information function
