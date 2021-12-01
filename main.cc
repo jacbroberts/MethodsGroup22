@@ -34,7 +34,7 @@ bool Login(User &user)
     // rt: EXIT
     if (LoginPassword == "EXIT") { goodbye(); }
 
-    if(user.Login(LoginUsername, LoginPassword)) 
+    if(user.Login(LoginUsername, LoginPassword))
     {
         cout << "Successfully logged in as " << LoginUsername << '\n';
         return true;
@@ -44,7 +44,7 @@ bool Login(User &user)
     }
 }
 
-bool Register(User &user) 
+bool Register(User &user)
 {
     string username, password, firstname, lastname, shipping, payment;
 
@@ -191,6 +191,10 @@ int main()
             conttwo = 1;
             string MainMenuOption;
             //while (MainMenuOption != "ACCOUNTINFO" && MainMenuOption != "CART" && MainMenuOption != "INVENTORY" && MainMenuOption != "EXIT")
+            string userGet;
+            user.GetUsername(userGet);
+            Cart userCart(userGet);
+            History userHistory(userGet);
             while(MainMenuOption != "EXIT" && user.GetIsLoggedIn())
             {
                 // rt: Welcome user what you wanna do
@@ -236,7 +240,7 @@ int main()
                         // rt: go to details function
                         if (AccountInfoOption == "DETAILS")
                         {
-                            
+
                         }
 
                         // rt: go to viewshipping information function
@@ -384,7 +388,7 @@ int main()
                         // rt: go to add an item function
                         if (CartOption == "ADDITEM")
                         {
-                          userCart.addItem(Gucci, 2);
+
                         }
 
                         // rt: go to quantity function
@@ -396,7 +400,16 @@ int main()
                         // rt: go to edit checkout function
                         if (CartOption == "CHECKOUT")
                         {
-
+                          bool checkoutStatus;
+                          checkoutStatus = userCart.checkout();
+                          if(checkoutStatus)
+                          {
+                            cout << "Checkout Successful" << endl;
+                          }
+                          else
+                          {
+                            cout << "Checkout Unsuccessful" << endl;
+                          }
                         }
 
                         // rt: BACK
@@ -439,10 +452,10 @@ int main()
                         {
                             cout << State.GetBrand() << ":   In Stock: " << State.GetCount() << "   Price: $" << State.GetPrice() << endl;
                         }
-                        
+
                         // rt: BACK
                         if (InvOption == "BACK") {}
-                        
+
                         // rt: EXIT
                         if (InvOption == "EXIT") { goodbye(); }
 
