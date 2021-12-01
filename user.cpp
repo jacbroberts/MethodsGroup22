@@ -82,10 +82,6 @@ std::string &outShipping, std::string &outPayment, int &outCartID) const {
                 size_t paymentStart = line.find(":", shippingEnd+1);
                 size_t paymentEnd = line.find(":", paymentStart+1);
                 outPayment = line.substr(paymentStart+1, paymentEnd-paymentStart-1);
-
-                // Get cart ID
-                size_t cartStart = line.find(":", paymentEnd+1);
-                outCartID = std::atoi(line.substr(cartStart).c_str());
                 break;
             }
         }
@@ -102,7 +98,7 @@ bool User::GetUserExists(std::string inUsername) const {
 
 bool User::ExportUserToString(std::string &outString) const {
     if(loggedIn) {
-        outString = "user:" + username + ":password:" + password + ":firstname:" + firstName + ":lastname:" + lastName+ ":shipping:" + shippingAddress+ ":payment:" + paymentInfo + ":cartID:" + " " + "\n";
+        outString = "user:" + username + ":password:" + password + ":firstname:" + firstName + ":lastname:" + lastName+ ":shipping:" + shippingAddress+ ":payment:" + paymentInfo + "\n";
         return true;
     }
     else {
@@ -177,9 +173,6 @@ bool User::Register(std::string inUsername, std::string inPassword, std::string 
     }
 
     // Create the user, and add it to the file
-
-    // TODO: Create the cart
-
     // Open file with append
     std::ofstream userFileW;
     if(!OpenUserFileWrite(userFileW, OutStream, true)) {
@@ -201,8 +194,7 @@ bool User::Register(std::string inUsername, std::string inPassword, std::string 
     userFileW << ":firstname:" << firstName; // Blank user info, til it is edited
     userFileW << ":lastname:" << lastName;
     userFileW << ":shipping:" << shippingAddress;
-    userFileW << ":payment:" << paymentInfo;
-    userFileW << ":cartID:" << " " << '\n';
+    userFileW << ":payment:" << paymentInfo << '\n';
 
     userFileW.close();
     return true;
@@ -249,7 +241,6 @@ bool User::Login(std::string inUsername, std::string inPassword) {
     lastName = lLastname;
     shippingAddress = lShipping;
     paymentInfo = lPayment;
-    cartID = lCartID;
 
     return true;
 }

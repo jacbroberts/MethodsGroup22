@@ -14,7 +14,7 @@ void goodbye()
     exit(EXIT_FAILURE);
 }
 
-void Login()
+void Login(User &user)
 {
     string LoginUsername;
     string LoginPassword;
@@ -29,6 +29,36 @@ void Login()
     cin >> LoginPassword;
     // rt: EXIT
     if (LoginPassword == "EXIT") { goodbye(); }
+
+    if(user.Login(LoginUsername, LoginPassword)) 
+    {
+        cout << "Successfully logged in as " << LoginUsername << '\n';
+    }
+}
+
+void Register(User &user) 
+{
+    string username, password, firstname, lastname, shipping, payment;
+
+    // Get user input
+    cout << "Enter username: ";
+    cin >> username;
+    cout << "Enter password: ";
+    cin >> password;
+    cout << " Enter first name: ";
+    cin >> firstname;
+    cout << "Enter last name: ";
+    cin >> lastname;
+    cout << "Enter shipping address: ";
+    cin >> shipping;
+    cout << "Enter payment info (Credit card number, Debit, etc.): ";
+    cin >> payment;
+
+
+    if(user.Register(username, password, firstname, lastname, shipping, payment))
+    {
+        cout << "Successfully created new user!\n";
+    }
 }
 
 int main()
@@ -76,6 +106,7 @@ int main()
     }
 
     // rt: Welcome
+    User user;
     string answer;
     int cont;
     int conttwo;
@@ -113,20 +144,10 @@ int main()
             // rt: Create username
             string username;
             cout << "Great, let's make a new account.\n";
-            cout << "Enter new username: ";
-            cin >> username;
-            // rt: EXIT
-            if (username == "EXIT") { goodbye(); }
-
-            // rt: Create password
-            string password;
-            cout << "Enter password: ";
-            cin >> password;
-            // rt: EXIT
-            if (password == "EXIT") { goodbye(); }
 
             // rt: move to login
-            Login();
+            //Login();
+            Register(user);
             cont = 1;
         }
         // rt: EXIT
@@ -136,7 +157,7 @@ int main()
     // rt: Yes I do have an account
     if (answer == "y")
     {
-        Login();
+        Login(user);
         cont = 1;
     }
 
@@ -231,13 +252,14 @@ int main()
                         // rt: basically back to welcome? or just exit?      
                         if (AccountInfoOption == "LOGOUT")
                         {
-
+                            user.Logout();
+                            AccountInfoOption = "BACK";
                         }
 
                         // rt: go to delete account function
                         if (AccountInfoOption == "DELETE")
                         {
-
+                            user.DeleteUser();
                         }
 
                         // rt: BACK
