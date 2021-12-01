@@ -119,7 +119,7 @@ int main()
         string answer;
         int cont;
         int conttwo;
-        while (answer != "y" && answer != "n")
+        while (answer != "y" && answer != "n" && answer != "EXIT")
         {
             cout << "##############################################";
             cout << "\nHello! Welcome to our T-shirt shop.\n\n";
@@ -135,7 +135,7 @@ int main()
         if (answer == "n")
         {
             string b;
-            while (b != "y" && b != "n")
+            while (b != "y" && b != "n" && b != "EXIT")
             {
                 cout << "\nYou must have an account to proceed.\n";
                 cout << "Would you like to create an account(y/n)? ";
@@ -213,7 +213,7 @@ int main()
                         cout << "Enter: HISTORY\n";
                         cout << "To view order history\n\n";
                         cout << "Enter: LOGOUT\n";
-                        cout << "To logout of your account\n";
+                        cout << "To logout of your account\n\n";
                         cout << "Enter: DELETE\n";
                         cout << "To delete you account\n\n";
                         cout << "Select an option: ";
@@ -266,6 +266,7 @@ int main()
                         if (AccountInfoOption == "DELETE")
                         {
                             user.DeleteUser();
+                            goodbye();
                         }
 
                         // rt: BACK
