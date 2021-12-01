@@ -241,19 +241,67 @@ int main()
                         // rt: go to edit shipping information function
                         if (AccountInfoOption == "EDITSHIPPING")
                         {
+                            bool edit = true;
+                            while(edit) { // Repeat until user confirms accuracy
+                                // Get shipping info
+                                string shipping;
+                                cout << "Enter new shipping address: ";
+                                cin.ignore(1, '\n'); // Ignore last endline value
+                                getline(cin, shipping);
 
+                                //Confirm shipping info
+                                string confirm;
+                                cout << "Is this information accurate?: ";
+                                cin >> confirm;
+                                if(confirm == "y" || confirm == "Y" || confirm == "Yes" || confirm == "YES" || confirm == "yes") { // Confirmed
+                                    if(user.EditShipping(shipping)) {
+                                        cout << "Updated shipping info.\n";
+                                    }
+                                    else {
+                                        cout << "An error occurred while updating shipping info! Going back...\n";
+                                    }
+                                    edit = false;
+                                }
+                            }
                         }
 
                         // rt: go to view payment information function
                         if (AccountInfoOption == "VIEWPAYINFO")
                         {
-
+                            string payment;
+                            if(user.GetPayment(payment)) {
+                                std::cout << "Payment Info: " << payment << '\n';
+                            }
+                            else {
+                                cout << "There was an error getting the user payment info!\n";
+                            }
                         }
 
                         // rt: go to edit payment information function
                         if (AccountInfoOption == "EDITPAYINFO")
                         {
+                            bool edit = true;
+                            while(edit) { // Repeat until user confirms accuracy
+                                // Get shipping info
+                                string payment;
+                                cout << "Enter new payment info: ";
+                                cin.ignore(1, '\n'); // Ignore last endline value
+                                getline(cin, payment);
 
+                                //Confirm shipping info
+                                string confirm;
+                                cout << "Is this information accurate?: ";
+                                cin >> confirm;
+                                if(confirm == "y" || confirm == "Y" || confirm == "Yes" || confirm == "YES" || confirm == "yes") { // Confirmed
+                                    if(user.EditPayment(payment)) {
+                                        cout << "Updated payment info.\n";
+                                    }
+                                    else {
+                                        cout << "An error occurred while updating payment info! Going back...\n";
+                                    }
+                                    edit = false;
+                                }
+                            }
                         }
 
                         // rt: go to history function
@@ -272,10 +320,8 @@ int main()
                         // rt: go to delete account function
                         if (AccountInfoOption == "DELETE")
                         {
-                            user.DeleteUser();
                             if(user.DeleteUser()) {
                                 cout << "User deleted.\n";
-                                goodbye();
                             }
                         }
 

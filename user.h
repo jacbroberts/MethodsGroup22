@@ -50,4 +50,5 @@ public:
     // Getters
     bool GetIsLoggedIn() const;
     bool GetShipping(std::string &outShipping) const;
+    bool GetPayment(std::string &outPayment) const;
 };

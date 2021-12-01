@@ -154,19 +154,19 @@ bool User::Register(std::string inUsername, std::string inPassword, std::string 
     }
 
     // Verify username is valid
-    if(username.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
+    if(inUsername.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
         OutStream << "Registration failed: Invalid username!\n";
         return false;
     }
 
     // Verify password is valid
-    if(password.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
+    if(inPassword.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
         OutStream << "Registration failed: Invalid password!\n";
         return false;
     }
 
     // Check if user is in the file
-    bool userExists = GetUserExists(username);
+    bool userExists = GetUserExists(inUsername);
     if(userExists) {
         OutStream << "Registration failed: Username already taken!\n";
         return false;
@@ -284,7 +284,7 @@ bool User::DeleteUser() {
     }
 
     // Write to file
-    std::cout << username;
+    //std::cout << username;
     userFileW << contents;
     userFileW.close();
 
@@ -328,6 +328,16 @@ bool User::GetIsLoggedIn() const {
 bool User::GetShipping(std::string &outShipping) const {
     if(loggedIn) {
         outShipping = shippingAddress;
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool User::GetPayment(std::string &outPayment) const {
+    if(loggedIn) {
+        outPayment = paymentInfo;
         return true;
     }
     else {
