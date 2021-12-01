@@ -82,10 +82,6 @@ std::string &outShipping, std::string &outPayment, int &outCartID) const {
                 size_t paymentStart = line.find(":", shippingEnd+1);
                 size_t paymentEnd = line.find(":", paymentStart+1);
                 outPayment = line.substr(paymentStart+1, paymentEnd-paymentStart-1);
-
-                // Get cart ID
-                size_t cartStart = line.find(":", paymentEnd+1);
-                outCartID = std::atoi(line.substr(cartStart).c_str());
                 break;
             }
         }
@@ -102,7 +98,7 @@ bool User::GetUserExists(std::string inUsername) const {
 
 bool User::ExportUserToString(std::string &outString) const {
     if(loggedIn) {
-        outString = "user:" + username + ":password:" + password + ":firstname:" + firstName + ":lastname:" + lastName+ ":shipping:" + shippingAddress+ ":payment:" + paymentInfo + ":cartID:" + " " + "\n";
+        outString = "user:" + username + ":password:" + password + ":firstname:" + firstName + ":lastname:" + lastName+ ":shipping:" + shippingAddress+ ":payment:" + paymentInfo + "\n";
         return true;
     }
     else {
@@ -158,28 +154,25 @@ bool User::Register(std::string inUsername, std::string inPassword, std::string 
     }
 
     // Verify username is valid
-    if(username.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
+    if(inUsername.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
         OutStream << "Registration failed: Invalid username!\n";
         return false;
     }
 
     // Verify password is valid
-    if(password.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
+    if(inPassword.find(":") != std::string::npos){ // Can't have :, which is the file delimeter
         OutStream << "Registration failed: Invalid password!\n";
         return false;
     }
 
     // Check if user is in the file
-    bool userExists = GetUserExists(username);
+    bool userExists = GetUserExists(inUsername);
     if(userExists) {
         OutStream << "Registration failed: Username already taken!\n";
         return false;
     }
 
     // Create the user, and add it to the file
-
-    // TODO: Create the cart
-
     // Open file with append
     std::ofstream userFileW;
     if(!OpenUserFileWrite(userFileW, OutStream, true)) {
@@ -201,8 +194,7 @@ bool User::Register(std::string inUsername, std::string inPassword, std::string 
     userFileW << ":firstname:" << firstName; // Blank user info, til it is edited
     userFileW << ":lastname:" << lastName;
     userFileW << ":shipping:" << shippingAddress;
-    userFileW << ":payment:" << paymentInfo;
-    userFileW << ":cartID:" << " " << '\n';
+    userFileW << ":payment:" << paymentInfo << '\n';
 
     userFileW.close();
     return true;
@@ -249,7 +241,6 @@ bool User::Login(std::string inUsername, std::string inPassword) {
     lastName = lLastname;
     shippingAddress = lShipping;
     paymentInfo = lPayment;
-    cartID = lCartID;
 
     return true;
 }
@@ -293,7 +284,7 @@ bool User::DeleteUser() {
     }
 
     // Write to file
-    std::cout << username;
+    //std::cout << username;
     userFileW << contents;
     userFileW.close();
 
@@ -332,4 +323,24 @@ bool User::EditPayment(std::string inPaymentInfo) {
 
 bool User::GetIsLoggedIn() const {
     return loggedIn;
+}
+
+bool User::GetShipping(std::string &outShipping) const {
+    if(loggedIn) {
+        outShipping = shippingAddress;
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+
+bool User::GetPayment(std::string &outPayment) const {
+    if(loggedIn) {
+        outPayment = paymentInfo;
+        return true;
+    }
+    else {
+        return false;
+    }
 }
