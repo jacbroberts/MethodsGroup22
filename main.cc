@@ -1,5 +1,11 @@
 #include <iostream>
 #include <stdlib.h>
+#include <iostream>
+#include <fstream>
+
+#include "inventory.h"
+#include "cart.h"
+#include "user.h"
 
 using namespace std;
 
@@ -9,7 +15,7 @@ void goodbye()
     exit(EXIT_FAILURE);
 }
 
-void Login()
+void Login(Cart& userCart, History& userHistory)
 {
     string LoginUsername;
     string LoginPassword;
@@ -24,10 +30,18 @@ void Login()
     cin >> LoginPassword;
     // rt: EXIT
     if (LoginPassword == "EXIT") { goodbye(); }
+
+    //jar: initializing cart and history
+    userCart.setUsername(LoginUsername);
+    userHistory.setUser(LoginUsername);
 }
 
 int main()
 {
+    //jar: initializing cart and History
+    Cart userCart;
+    History userHistory;
+
     // jdr: Initializing the Inventory
     Inventory Gucci, Walmart, State;
     string id, stock;
@@ -121,7 +135,7 @@ int main()
             if (password == "EXIT") { goodbye(); }
 
             // rt: move to login
-            Login();
+            Login(userCart, userHistory);
             cont = 1;
         }
         // rt: EXIT
@@ -131,7 +145,7 @@ int main()
     // rt: Yes I do have an account
     if (answer == "y")
     {
-        Login();
+        Login(userCart, userHistory);
         cont = 1;
     }
 
@@ -223,7 +237,7 @@ int main()
                         }
 
                         // rt: go to logout function
-                        // rt: basically back to welcome? or just exit?      
+                        // rt: basically back to welcome? or just exit?
                         if (AccountInfoOption == "LOGOUT")
                         {
 
@@ -267,7 +281,7 @@ int main()
                         // rt: go to view cart function
                         if (CartOption == "CART")
                         {
-
+                          userCart.viewCart();
                         }
 
                         // rt: go to remove an item function
@@ -279,7 +293,7 @@ int main()
                         // rt: go to add an item function
                         if (CartOption == "ADDITEM")
                         {
-
+                          userCart.addItem(Gucci, 2);
                         }
 
                         // rt: go to quantity function
@@ -317,19 +331,19 @@ int main()
                     // jdr: view price and stock of Gucci
                     if (InvOption == "GUCCI")
                     {
-                        cout << Gucci.GetBrand() << ":   In Stock: " << Gucci.GetCount << "   Price: $" << Gucci.GetPrice << endl;
+                        cout << Gucci.GetBrand() << ":   In Stock: " << Gucci.GetCount() << "   Price: $" << Gucci.GetPrice() << endl;
                     }
 
                     // jdr: view price and stock of Walmart
                     if (InvOption == "WALMART")
                     {
-                        cout << Walmart.GetBrand() << ":   In Stock: " << Walmart.GetCount << "   Price: $" << Walmart.GetPrice << endl;
+                        cout << Walmart.GetBrand() << ":   In Stock: " << Walmart.GetCount() << "   Price: $" << Walmart.GetPrice() << endl;
                     }
 
                     // jdr: view price and stock of State
                     if (InvOption == "HAIL STATE")
                     {
-                        cout << State.GetBrand() << ":   In Stock: " << State.GetCount << "   Price: $" << State.GetPrice << endl;
+                        cout << State.GetBrand() << ":   In Stock: " << State.GetCount() << "   Price: $" << State.GetPrice() << endl;
                     }
 
                     // rt: EXIT
@@ -344,4 +358,3 @@ int main()
     }
     return 0;
 } ;
-

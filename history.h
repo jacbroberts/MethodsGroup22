@@ -1,5 +1,6 @@
 #pragma once
 #include "cart.h"
+#include "inventory.h"
 
 using std::string;
 using std::vector;
@@ -13,8 +14,15 @@ private:
     string file_name;
 
 public:
+    History()
+    {
+      user = "";
+      file_name = "";
+    }
     History(string username);
-    History(string username, vector<string> items, vector<int> quantities);
+    History(string username, vector<Inventory> items, vector<int> quantities);
+
+    void setUser(string username);
 
     void Display();
     void DeleteHistory();

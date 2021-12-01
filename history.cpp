@@ -9,12 +9,11 @@ using std::ofstream;
 using std::cout;
 using std::endl;
 
-History::History(string username, vector<string> items, vector<int> quantity)
+History::History(string username, vector<Inventory> items, vector<int> quantity)
 {
   //initializes values
   user = username;
   file_name = "History_" + username + ".txt";
-  items_ids = items;
   quantities = quantity;
 
   //creates history file if not already created
@@ -31,11 +30,18 @@ History::History(string username, vector<string> items, vector<int> quantity)
   UserFile.open(file_name, std::ios_base::app);
   for(int i = 0; i < items_ids.size(); i++)
   {
-    UserFile << items_ids[i] << " " << quantities[i] << "\n";
+    items_ids.push_back(items[i].GetID());
+    UserFile << items[i].GetID() << " " << quantities[i] << "\n";
   }
 }
 
 History::History(string username)
+{
+  user = username;
+  file_name = "History_" + username + ".txt";
+}
+
+void History::setUser(string username)
 {
   user = username;
   file_name = "History_" + username + ".txt";
