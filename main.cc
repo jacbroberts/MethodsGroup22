@@ -196,7 +196,7 @@ int main()
                 if (MainMenuOption == "ACCOUNTINFO")
                 {
                     string AccountInfoOption;
-                    while(AccountInfoOption != "BACK" && AccountInfoOption != "LOGOUT")
+                    while(AccountInfoOption != "BACK" && user.GetIsLoggedIn())
                     {
                         cout << "##############################################";
                         cout << "\nThis is where you can see information about your account\n\n";
@@ -265,7 +265,9 @@ int main()
                         // rt: go to delete account function
                         if (AccountInfoOption == "DELETE")
                         {
-                            user.DeleteUser();
+                            if(user.DeleteUser()) {
+                                cout << "User deleted.\n";
+                            }
                         }
 
                         // rt: BACK
