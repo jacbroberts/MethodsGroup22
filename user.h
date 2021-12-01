@@ -49,4 +49,7 @@ public:
 
     // Getters
     bool GetIsLoggedIn() const;
+    bool GetShipping(std::string &outShipping) const;
+    bool GetPayment(std::string &outPayment) const;
+    bool GetUsername(std::string &outUsername) const;
 };

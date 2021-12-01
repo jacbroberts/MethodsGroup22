@@ -17,8 +17,7 @@ void goodbye()
 }
 
 
-bool Login(User& user)
-
+bool Login(User &user)
 {
     string LoginUsername;
     string LoginPassword;
@@ -34,7 +33,8 @@ bool Login(User& user)
     // rt: EXIT
     if (LoginPassword == "EXIT") { goodbye(); }
 
-    if (user.Login(LoginUsername, LoginPassword))
+
+    if(user.Login(LoginUsername, LoginPassword))
     {
         cout << "Successfully logged in as " << LoginUsername << '\n';
         return true;
@@ -44,7 +44,8 @@ bool Login(User& user)
     }
 }
 
-bool Register(User& user)
+
+bool Register(User &user)
 {
     string username, password, firstname, lastname, shipping, payment;
 
@@ -64,7 +65,8 @@ bool Register(User& user)
     getline(cin, payment);
 
 
-    if (user.Register(username, password, firstname, lastname, shipping, payment))
+
+    if(user.Register(username, password, firstname, lastname, shipping, payment))
     {
         cout << "Successfully created new user!\n";
         return true;
@@ -124,7 +126,7 @@ int main()
     }
 
     // rt: Welcome
-    while (true) {
+    while(true) {
         User user;
         string answer;
         int cont;
@@ -165,7 +167,8 @@ int main()
                 cout << "Great, let's make a new account.\n";
 
                 // rt: move to login
-                if (Register(user))
+
+                if(Register(user))
                     cont = 1;
             }
             // rt: EXIT
@@ -178,7 +181,7 @@ int main()
         // rt: Yes I do have an account
         if (answer == "y")
         {
-            if (Login(user))
+            if(Login(user))
                 cont = 1;
         }
 
@@ -195,7 +198,8 @@ int main()
             user.GetUsername(userGet);
             Cart userCart(userGet);
             History userHistory(userGet);
-            while (MainMenuOption != "EXIT" && user.GetIsLoggedIn())
+
+            while(MainMenuOption != "EXIT" && user.GetIsLoggedIn())
             {
                 // rt: Welcome user what you wanna do
                 cout << "##############################################";
@@ -214,7 +218,8 @@ int main()
                 if (MainMenuOption == "ACCOUNTINFO")
                 {
                     string AccountInfoOption;
-                    while (AccountInfoOption != "BACK" && user.GetIsLoggedIn())
+
+                    while(AccountInfoOption != "BACK" && user.GetIsLoggedIn())
                     {
                         cout << "##############################################";
                         cout << "\nThis is where you can see information about your account\n\n";
@@ -247,7 +252,8 @@ int main()
                         if (AccountInfoOption == "VIEWSHIPPING")
                         {
                             string shipping;
-                            if (user.GetShipping(shipping)) {
+
+                            if(user.GetShipping(shipping)) {
                                 std::cout << "Shipping Address: " << shipping << '\n';
                             }
                             else {
@@ -259,7 +265,8 @@ int main()
                         if (AccountInfoOption == "EDITSHIPPING")
                         {
                             bool edit = true;
-                            while (edit) { // Repeat until user confirms accuracy
+
+                            while(edit) { // Repeat until user confirms accuracy
                                 // Get shipping info
                                 string shipping;
                                 cout << "Enter new shipping address: ";
@@ -270,8 +277,9 @@ int main()
                                 string confirm;
                                 cout << "Is this information accurate?: ";
                                 cin >> confirm;
-                                if (confirm == "y" || confirm == "Y" || confirm == "Yes" || confirm == "YES" || confirm == "yes") { // Confirmed
-                                    if (user.EditShipping(shipping)) {
+
+                                if(confirm == "y" || confirm == "Y" || confirm == "Yes" || confirm == "YES" || confirm == "yes") { // Confirmed
+                                    if(user.EditShipping(shipping)) {
                                         cout << "Updated shipping info.\n";
                                     }
                                     else {
@@ -286,7 +294,8 @@ int main()
                         if (AccountInfoOption == "VIEWPAYINFO")
                         {
                             string payment;
-                            if (user.GetPayment(payment)) {
+
+                            if(user.GetPayment(payment)) {
                                 std::cout << "Payment Info: " << payment << '\n';
                             }
                             else {
@@ -298,7 +307,8 @@ int main()
                         if (AccountInfoOption == "EDITPAYINFO")
                         {
                             bool edit = true;
-                            while (edit) { // Repeat until user confirms accuracy
+
+                            while(edit) { // Repeat until user confirms accuracy
                                 // Get shipping info
                                 string payment;
                                 cout << "Enter new payment info: ";
@@ -309,8 +319,9 @@ int main()
                                 string confirm;
                                 cout << "Is this information accurate?: ";
                                 cin >> confirm;
-                                if (confirm == "y" || confirm == "Y" || confirm == "Yes" || confirm == "YES" || confirm == "yes") { // Confirmed
-                                    if (user.EditPayment(payment)) {
+
+                                if(confirm == "y" || confirm == "Y" || confirm == "Yes" || confirm == "YES" || confirm == "yes") { // Confirmed
+                                    if(user.EditPayment(payment)) {
                                         cout << "Updated payment info.\n";
                                     }
                                     else {
@@ -324,7 +335,7 @@ int main()
                         // rt: go to history function
                         if (AccountInfoOption == "HISTORY")
                         {
-                            userHistory.Display();
+                          userHistory.Display();
                         }
 
                         // rt: go to logout function
@@ -337,7 +348,7 @@ int main()
                         // rt: go to delete account function
                         if (AccountInfoOption == "DELETE")
                         {
-                            if (user.DeleteUser()) {
+                            if(user.DeleteUser()) {
                                 cout << "User deleted.\n";
                             }
                         }
@@ -355,7 +366,7 @@ int main()
                 {
                     string CartOption;
                     //while (CartOption != "CART" && CartOption != "REMOVEITEM" && CartOption != "ADDITEM" && CartOption != "QUANTITY" && CartOption != "CHECKOUT" && CartOption != "EXIT")
-                    while (CartOption != "BACK")
+                    while(CartOption != "BACK")
                     {
                         cout << "##############################################";
                         cout << "\nThis is where you can see information about your cart\n\n";
@@ -376,7 +387,7 @@ int main()
                         // rt: go to view cart function
                         if (CartOption == "CART")
                         {
-                            userCart.viewCart();
+                          userCart.viewCart();
                         }
 
                         // rt: go to remove an item function
@@ -388,95 +399,95 @@ int main()
                         // rt: go to add an item function
                         if (CartOption == "ADDITEM")
                         {
-                            string itemBrand;
-                            int itemQuantity;
-                            cout << "Enter Item Brand: ";
-                            cin >> itemBrand;
-                            cout << "Enter Desired Quantity: ";
-                            cin >> itemQuantity;
-                            if (itemQuantity > 0)
+                          string itemBrand;
+                          int itemQuantity;
+                          cout << "Enter Item Brand: ";
+                          cin >> itemBrand;
+                          cout << "Enter Desired Quantity: ";
+                          cin >> itemQuantity;
+                          if(itemQuantity > 0)
+                          {
+                            if(itemBrand == "GUCCI")
                             {
-                                if (itemBrand == "GUCCI")
-                                {
-                                    userCart.addItem(Gucci, itemQuantity);
-                                }
-                                else if (itemBrand == "WALMART")
-                                {
-                                    userCart.addItem(Walmart, itemQuantity);
-                                }
-                                else if (itemBrand == "HAILSTATE")
-                                {
-                                    userCart.addItem(State, itemQuantity);
-                                }
-                                else
-                                {
-                                    cout << "Not an inventory item." << endl;
-                                }
+                              userCart.addItem(Gucci, itemQuantity);
+                            }
+                            else if(itemBrand == "WALMART")
+                            {
+                              userCart.addItem(Walmart, itemQuantity);
+                            }
+                            else if(itemBrand == "HAILSTATE")
+                            {
+                              userCart.addItem(State, itemQuantity);
                             }
                             else
                             {
-                                cout << "Not a valid quantity." << endl;
+                              cout << "Not an inventory item." << endl;
                             }
+                          }
+                          else
+                          {
+                            cout << "Not a valid quantity." << endl;
+                          }
                         }
 
                         // rt: go to quantity function
                         if (CartOption == "QUANTITY")
                         {
-                            bool inCart;
-                            string itemBrand;
-                            int itemQuantity;
-                            cout << "Enter Item Brand: ";
-                            cin >> itemBrand;
-                            cout << "Enter Desired Quantity: ";
-                            cin >> itemQuantity;
-                            if (itemQuantity > 0)
+                          bool inCart;
+                          string itemBrand;
+                          int itemQuantity;
+                          cout << "Enter Item Brand: ";
+                          cin >> itemBrand;
+                          cout << "Enter Desired Quantity: ";
+                          cin >> itemQuantity;
+                          if(itemQuantity > 0)
+                          {
+                            if(itemBrand == "GUCCI")
                             {
-                                if (itemBrand == "GUCCI")
-                                {
-                                    inCart = userCart.changeQuantity(Gucci, itemQuantity);
-                                }
-                                else if (itemBrand == "WALMART")
-                                {
-                                    inCart = userCart.changeQuantity(Walmart, itemQuantity);
-                                }
-                                else if (itemBrand == "HAILSTATE")
-                                {
-                                    inCart = userCart.changeQuantity(State, itemQuantity);
-                                }
-                                else
-                                {
-                                    cout << "Not an inventory item." << endl;
-                                }
+                              inCart = userCart.changeQuantity(Gucci, itemQuantity);
+                            }
+                            else if(itemBrand == "WALMART")
+                            {
+                              inCart = userCart.changeQuantity(Walmart, itemQuantity);
+                            }
+                            else if(itemBrand == "HAILSTATE")
+                            {
+                              inCart = userCart.changeQuantity(State, itemQuantity);
                             }
                             else
                             {
-                                cout << "Not a valid quantity." << endl;
+                              cout << "Not an inventory item." << endl;
                             }
-                            if (!inCart)
-                            {
-
-                            }
+                          }
+                          else
+                          {
+                            cout << "Not a valid quantity." << endl;
+                          }
+                          if(!inCart)
+                          {
+                            
+                          }
 
                         }
 
                         // rt: go to edit checkout function
                         if (CartOption == "CHECKOUT")
                         {
-                            vector<Inventory> brands = { Gucci, Walmart, State };
-                            vector<int> decrements;
-                            bool checkoutStatus;
-                            checkoutStatus = userCart.checkout(brands, decrements);
-                            if (checkoutStatus)
-                            {
-                                cout << "Checkout Successful" << endl;
-                            }
-                            else
-                            {
-                                cout << "Checkout Unsuccessful" << endl;
-                            }
-                            Gucci.DecrementStock(decrements[0]);
-                            Walmart.DecrementStock(decrements[1]);
-                            State.DecrementStock(decrements[2]);
+                          vector<Inventory> brands = {Gucci, Walmart, State};
+                          vector<int> decrements;
+                          bool checkoutStatus;
+                          checkoutStatus = userCart.checkout(brands, decrements);
+                          if(checkoutStatus)
+                          {
+                            cout << "Checkout Successful" << endl;
+                          }
+                          else
+                          {
+                            cout << "Checkout Unsuccessful" << endl;
+                          }
+                          Gucci.DecrementStock(decrements[0]);
+                          Walmart.DecrementStock(decrements[1]);
+                          State.DecrementStock(decrements[2]);
                         }
 
                         // rt: BACK
@@ -491,7 +502,7 @@ int main()
                 if (MainMenuOption == "INVENTORY")
                 {
                     string InvOption;
-                    while (InvOption != "BACK")
+                    while(InvOption != "BACK")
                     {
                         cout << "\n##############################################";
                         cout << "\nThis is where you can browse our inventory\n\n";
@@ -520,6 +531,7 @@ int main()
                             cout << State.GetBrand() << ":   In Stock: " << State.GetCount() << "   Price: $" << State.GetPrice() << endl;
                         }
 
+                        // jdr: view price and stock of all items
                         if (InvOption == "ALL")
                         {
                             cout << Gucci.GetBrand() << ":   In Stock: " << Gucci.GetCount() << "   Price: $" << Gucci.GetPrice() << endl;
@@ -542,4 +554,4 @@ int main()
         }
     }
     return 0;
-};
+} ;
