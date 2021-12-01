@@ -1,8 +1,10 @@
 #include <iostream>
 #include <fstream>
 #include <stdlib.h>
+
 #include "inventory.h"
 #include "history.h"
+
 #include "cart.h"
 #include "user.h"
 
@@ -14,7 +16,9 @@ void goodbye()
     exit(EXIT_FAILURE);
 }
 
+
 bool Login(User &user)
+
 {
     string LoginUsername;
     string LoginPassword;
@@ -68,10 +72,15 @@ bool Register(User &user)
     else {
         return false;
     }
+
 }
 
 int main()
 {
+    //jar: initializing cart and History
+    Cart userCart;
+    History userHistory;
+
     // jdr: Initializing the Inventory
     Inventory Gucci, Walmart, State;
     string id, stock;
@@ -160,8 +169,11 @@ int main()
                     cont = 1;
             }
             // rt: EXIT
+
             if (b == "EXIT") { goodbye(); }
+
         }
+
 
         // rt: Yes I do have an account
         if (answer == "y")
@@ -169,6 +181,7 @@ int main()
             if(Login(user))
                 cont = 1;
         }
+
 
         // rt: EXIT
         if (answer == "EXIT") { goodbye(); }
@@ -311,7 +324,7 @@ int main()
                         }
 
                         // rt: go to logout function
-                        // rt: basically back to welcome? or just exit?      
+                        // rt: basically back to welcome? or just exit?
                         if (AccountInfoOption == "LOGOUT")
                         {
                             user.Logout();
@@ -358,7 +371,7 @@ int main()
                         // rt: go to view cart function
                         if (CartOption == "CART")
                         {
-
+                          userCart.viewCart();
                         }
 
                         // rt: go to remove an item function
@@ -370,7 +383,7 @@ int main()
                         // rt: go to add an item function
                         if (CartOption == "ADDITEM")
                         {
-
+                          userCart.addItem(Gucci, 2);
                         }
 
                         // rt: go to quantity function
@@ -435,4 +448,3 @@ int main()
     }
     return 0;
 } ;
-
