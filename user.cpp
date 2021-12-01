@@ -334,3 +334,13 @@ bool User::GetShipping(std::string &outShipping) const {
         return false;
     }
 }
+
+bool User::GetPayment(std::string &outPayment) const {
+    if(loggedIn) {
+        outPayment = paymentInfo;
+        return true;
+    }
+    else {
+        return false;
+    }
+}
