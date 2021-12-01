@@ -320,10 +320,8 @@ int main()
                         // rt: go to delete account function
                         if (AccountInfoOption == "DELETE")
                         {
-                            user.DeleteUser();
                             if(user.DeleteUser()) {
                                 cout << "User deleted.\n";
-                                goodbye();
                             }
                         }
 

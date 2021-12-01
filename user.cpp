@@ -284,7 +284,7 @@ bool User::DeleteUser() {
     }
 
     // Write to file
-    std::cout << username;
+    //std::cout << username;
     userFileW << contents;
     userFileW.close();
 
