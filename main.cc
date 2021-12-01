@@ -49,14 +49,15 @@ bool Register(User &user)
     cin >> username;
     cout << "Enter password: ";
     cin >> password;
-    cout << " Enter first name: ";
+    cout << "Enter first name: ";
     cin >> firstname;
     cout << "Enter last name: ";
     cin >> lastname;
-    cout << "Enter shipping address: ";
-    cin >> shipping;
+    cout << "Enter shipping address: ";;
+    cin.ignore(1, '\n'); // Ignore last endline value
+    getline(cin, shipping);
     cout << "Enter payment info (Credit card number, Debit, etc.): ";
-    cin >> payment;
+    getline(cin, payment);
 
 
     if(user.Register(username, password, firstname, lastname, shipping, payment))
