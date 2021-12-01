@@ -344,3 +344,13 @@ bool User::GetPayment(std::string &outPayment) const {
         return false;
     }
 }
+
+bool User::GetUsername(std::string &outUsername) const {
+    if(loggedIn) {
+        outUsername = username;
+        return true;
+    }
+    else {
+        return false;
+    }
+}
