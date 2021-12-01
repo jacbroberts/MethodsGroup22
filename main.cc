@@ -18,7 +18,6 @@ void goodbye()
 
 
 bool Login(User &user)
-
 {
     string LoginUsername;
     string LoginPassword;
@@ -34,6 +33,7 @@ bool Login(User &user)
     // rt: EXIT
     if (LoginPassword == "EXIT") { goodbye(); }
 
+
     if(user.Login(LoginUsername, LoginPassword))
     {
         cout << "Successfully logged in as " << LoginUsername << '\n';
@@ -43,6 +43,7 @@ bool Login(User &user)
         return false;
     }
 }
+
 
 bool Register(User &user)
 {
@@ -62,6 +63,7 @@ bool Register(User &user)
     getline(cin, shipping);
     cout << "Enter payment info (Credit card number, Debit, etc.): ";
     getline(cin, payment);
+
 
 
     if(user.Register(username, password, firstname, lastname, shipping, payment))
@@ -165,6 +167,7 @@ int main()
                 cout << "Great, let's make a new account.\n";
 
                 // rt: move to login
+
                 if(Register(user))
                     cont = 1;
             }
@@ -195,6 +198,7 @@ int main()
             user.GetUsername(userGet);
             Cart userCart(userGet);
             History userHistory(userGet);
+
             while(MainMenuOption != "EXIT" && user.GetIsLoggedIn())
             {
                 // rt: Welcome user what you wanna do
@@ -214,6 +218,7 @@ int main()
                 if (MainMenuOption == "ACCOUNTINFO")
                 {
                     string AccountInfoOption;
+
                     while(AccountInfoOption != "BACK" && user.GetIsLoggedIn())
                     {
                         cout << "##############################################";
@@ -247,6 +252,7 @@ int main()
                         if (AccountInfoOption == "VIEWSHIPPING")
                         {
                             string shipping;
+
                             if(user.GetShipping(shipping)) {
                                 std::cout << "Shipping Address: " << shipping << '\n';
                             }
@@ -259,6 +265,7 @@ int main()
                         if (AccountInfoOption == "EDITSHIPPING")
                         {
                             bool edit = true;
+
                             while(edit) { // Repeat until user confirms accuracy
                                 // Get shipping info
                                 string shipping;
@@ -270,6 +277,7 @@ int main()
                                 string confirm;
                                 cout << "Is this information accurate?: ";
                                 cin >> confirm;
+
                                 if(confirm == "y" || confirm == "Y" || confirm == "Yes" || confirm == "YES" || confirm == "yes") { // Confirmed
                                     if(user.EditShipping(shipping)) {
                                         cout << "Updated shipping info.\n";
@@ -286,6 +294,7 @@ int main()
                         if (AccountInfoOption == "VIEWPAYINFO")
                         {
                             string payment;
+
                             if(user.GetPayment(payment)) {
                                 std::cout << "Payment Info: " << payment << '\n';
                             }
@@ -298,6 +307,7 @@ int main()
                         if (AccountInfoOption == "EDITPAYINFO")
                         {
                             bool edit = true;
+
                             while(edit) { // Repeat until user confirms accuracy
                                 // Get shipping info
                                 string payment;
@@ -309,6 +319,7 @@ int main()
                                 string confirm;
                                 cout << "Is this information accurate?: ";
                                 cin >> confirm;
+
                                 if(confirm == "y" || confirm == "Y" || confirm == "Yes" || confirm == "YES" || confirm == "yes") { // Confirmed
                                     if(user.EditPayment(payment)) {
                                         cout << "Updated payment info.\n";
@@ -517,6 +528,14 @@ int main()
                         // jdr: view price and stock of State
                         if (InvOption == "HAILSTATE")
                         {
+                            cout << State.GetBrand() << ":   In Stock: " << State.GetCount() << "   Price: $" << State.GetPrice() << endl;
+                        }
+
+                        // jdr: view price and stock of all items
+                        if (InvOption == "ALL")
+                        {
+                            cout << Gucci.GetBrand() << ":   In Stock: " << Gucci.GetCount() << "   Price: $" << Gucci.GetPrice() << endl;
+                            cout << Walmart.GetBrand() << ":   In Stock: " << Walmart.GetCount() << "   Price: $" << Walmart.GetPrice() << endl;
                             cout << State.GetBrand() << ":   In Stock: " << State.GetCount() << "   Price: $" << State.GetPrice() << endl;
                         }
 
