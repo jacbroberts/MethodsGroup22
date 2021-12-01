@@ -12,11 +12,11 @@ user.o: user.h user.cpp
 history.o: history.h history.cpp
 	g++ -c history.cpp
 
-cart.o: cart.h cart.cpp history.h history.cpp
+cart.o: cart.h cart.cpp history.h history.cpp inventory.h inventory.cpp
 	g++ -c cart.cpp
 
 
-main.o: main.cc cart.h history.h user.h inventory.h 
+main.o: main.cc cart.h history.h user.h inventory.h
 
 	g++ -c main.cc
 

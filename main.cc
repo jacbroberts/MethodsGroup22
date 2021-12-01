@@ -324,7 +324,7 @@ int main()
                         // rt: go to history function
                         if (AccountInfoOption == "HISTORY")
                         {
-
+                          userHistory.Display();
                         }
 
                         // rt: go to logout function
@@ -388,20 +388,84 @@ int main()
                         // rt: go to add an item function
                         if (CartOption == "ADDITEM")
                         {
-
+                          string itemBrand;
+                          int itemQuantity;
+                          cout << "Enter Item Brand: ";
+                          cin >> itemBrand;
+                          cout << "Enter Desired Quantity: ";
+                          cin >> itemQuantity;
+                          if(itemQuantity > 0)
+                          {
+                            if(itemBrand == "GUCCI")
+                            {
+                              userCart.addItem(Gucci, itemQuantity);
+                            }
+                            else if(itemBrand == "WALMART")
+                            {
+                              userCart.addItem(Walmart, itemQuantity);
+                            }
+                            else if(itemBrand == "HAILSTATE")
+                            {
+                              userCart.addItem(State, itemQuantity);
+                            }
+                            else
+                            {
+                              cout << "Not an inventory item." << endl;
+                            }
+                          }
+                          else
+                          {
+                            cout << "Not a valid quantity." << endl;
+                          }
                         }
 
                         // rt: go to quantity function
                         if (CartOption == "QUANTITY")
                         {
+                          bool inCart;
+                          string itemBrand;
+                          int itemQuantity;
+                          cout << "Enter Item Brand: ";
+                          cin >> itemBrand;
+                          cout << "Enter Desired Quantity: ";
+                          cin >> itemQuantity;
+                          if(itemQuantity > 0)
+                          {
+                            if(itemBrand == "GUCCI")
+                            {
+                              inCart = userCart.changeQuantity(Gucci, itemQuantity);
+                            }
+                            else if(itemBrand == "WALMART")
+                            {
+                              inCart = userCart.changeQuantity(Walmart, itemQuantity);
+                            }
+                            else if(itemBrand == "HAILSTATE")
+                            {
+                              inCart = userCart.changeQuantity(State, itemQuantity);
+                            }
+                            else
+                            {
+                              cout << "Not an inventory item." << endl;
+                            }
+                          }
+                          else
+                          {
+                            cout << "Not a valid quantity." << endl;
+                          }
+                          if(!inCart)
+                          {
+                            
+                          }
 
                         }
 
                         // rt: go to edit checkout function
                         if (CartOption == "CHECKOUT")
                         {
+                          vector<Inventory> brands = {Gucci, Walmart, State};
+                          vector<int> decrements;
                           bool checkoutStatus;
-                          checkoutStatus = userCart.checkout();
+                          checkoutStatus = userCart.checkout(brands, decrements);
                           if(checkoutStatus)
                           {
                             cout << "Checkout Successful" << endl;
@@ -410,6 +474,9 @@ int main()
                           {
                             cout << "Checkout Unsuccessful" << endl;
                           }
+                          Gucci.DecrementStock(decrements[0]);
+                          Walmart.DecrementStock(decrements[1]);
+                          State.DecrementStock(decrements[2]);
                         }
 
                         // rt: BACK

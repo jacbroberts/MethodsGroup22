@@ -73,6 +73,7 @@ bool Cart::addItem(Inventory item, int quantity)
     }
     else
     {
+      cout << "Quantity Not Available" << endl;
       return false;
     }
   }
@@ -88,12 +89,21 @@ bool Cart::changeQuantity(Inventory item, int quantity)
     if(items[i].GetID() == item.GetID())
     {
       //todo: check if quantity desired is available
+      if(items[i].GetCount() >= quantity)
+      {
+        //jr: change item quantity
+        this->quantity[i] = quantity;
+        return true;
+      }
+      else
+      {
+        cout << "Quantity not available" << endl;
+        return false;
+      }
 
-      //jr: change item quantity
-      this->quantity[i] = quantity;
-      return true;
     }
   }
+  cout << "Please add item to inventory first" << endl;
   return false;
 
 }
@@ -113,17 +123,31 @@ bool Cart::removeItem(Inventory item)
   return true;
 }
 
-bool Cart::checkout()
+bool Cart::checkout(vector<Inventory> brands, vector<int>& decrements)
 {
+  for(int i = 0; i < brands.size(); i++)
+  {
+    decrements.push_back(0);
+  }
+
   for(int i = 0; i < items.size(); i++)
   {
     //jr: decrement the items in inventory by given amount
-    items[i].DecrementStock(quantity[i]);
+    for(int j = 0; j < brands.size(); j++)
+    {
+      if(brands[j].GetID() == items[i].GetID())
+      {
+        decrements[j] = quantity[i];
+      }
+
+    }
   }
+
   //jr: add items to user history
   History history(username, items, quantity);
   //jr: remove items from User's Cart
   items.clear();
+  quantity.clear();
 
   return true;
 }

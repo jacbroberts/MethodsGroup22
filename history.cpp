@@ -32,12 +32,13 @@ History::History(string user, vector<Inventory> items, vector<int> quantity)
   }
 
   //adds items and quantities to history file
+  cout << "Adding items to history" << endl;
   ofstream UserFile;
   UserFile.open(file_name, std::ios_base::app);
-  for(int i = 0; i < items_ids.size(); i++)
+  for(int i = 0; i < items.size(); i++)
   {
     items_ids.push_back(items[i].GetID());
-    UserFile << items[i].GetID() << " " << quantities[i] << "\n";
+    UserFile << items_ids[i] << " " << quantities[i] << "\n";
   }
 }
 

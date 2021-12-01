@@ -34,7 +34,7 @@ public:
     bool addItem(Inventory item, int quantity = 1);
     bool changeQuantity(Inventory item, int quantity);
     bool removeItem(Inventory item);
-    bool checkout();
+    bool checkout(vector<Inventory> brands, vector<int>& decrements);
 
 
 
