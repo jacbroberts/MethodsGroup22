@@ -196,7 +196,7 @@ int main()
                 if (MainMenuOption == "ACCOUNTINFO")
                 {
                     string AccountInfoOption;
-                    while(AccountInfoOption != "BACK" && AccountInfoOption != "LOGOUT")
+                    while(AccountInfoOption != "BACK" && user.GetIsLoggedIn())
                     {
                         cout << "##############################################";
                         cout << "\nThis is where you can see information about your account\n\n";
@@ -222,13 +222,19 @@ int main()
                         // rt: go to details function
                         if (AccountInfoOption == "DETAILS")
                         {
-
+                            
                         }
 
                         // rt: go to viewshipping information function
                         if (AccountInfoOption == "VIEWSHIPPING")
                         {
-
+                            string shipping;
+                            if(user.GetShipping(shipping)) {
+                                std::cout << "Shipping Address: " << shipping << '\n';
+                            }
+                            else {
+                                cout << "There was an error getting the user shipping info!\n";
+                            }
                         }
 
                         // rt: go to edit shipping information function
@@ -266,7 +272,10 @@ int main()
                         if (AccountInfoOption == "DELETE")
                         {
                             user.DeleteUser();
-                            goodbye();
+                            if(user.DeleteUser()) {
+                                cout << "User deleted.\n";
+                                goodbye();
+                            }
                         }
 
                         // rt: BACK
