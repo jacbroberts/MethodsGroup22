@@ -488,7 +488,12 @@ int main()
                         // rt: go to edit checkout function
                         if (CartOption == "CHECKOUT")
                         {
-                          vector<Inventory> brands = {Gucci, Walmart, State};
+                          vector<Inventory> brands;
+                          brands.push_back(Gucci);
+                          brands.push_back(Walmart);
+                          brands.push_back(State);
+    
+
                           vector<int> decrements;
                           bool checkoutStatus;
                           checkoutStatus = userCart.checkout(brands, decrements);
