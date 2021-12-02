@@ -408,8 +408,33 @@ int main()
                         // rt: go to remove an item function
                         if (CartOption == "REMOVEITEM")
                         {
+                          string itemBrand;
+
+                          cout << "Enter Item Brand: ";
+                          cin >> itemBrand;
+
+
+                          if(itemBrand == "GUCCI")
+                          {
+                            userCart.removeItem(Gucci);
+                          }
+                          else if(itemBrand == "WALMART")
+                          {
+                            userCart.removeItem(Walmart);
+                          }
+                          else if(itemBrand == "HAILSTATE")
+                          {
+                            userCart.removeItem(State);
+                          }
+                          else
+                          {
+                            cout << "Not an inventory item." << endl;
+                          }
+
+
 
                         }
+
 
                         // rt: go to add an item function
                         if (CartOption == "ADDITEM")
@@ -480,7 +505,7 @@ int main()
                           }
                           if(!inCart)
                           {
-                            
+
                           }
 
                         }
@@ -492,7 +517,7 @@ int main()
                           brands.push_back(Gucci);
                           brands.push_back(Walmart);
                           brands.push_back(State);
-    
+
 
                           vector<int> decrements;
                           bool checkoutStatus;
@@ -500,7 +525,7 @@ int main()
                           if(checkoutStatus)
                           {
                             cout << "Checkout Successful" << endl;
-                              
+
                             // Decrement stock of items after purchase
                             Gucci.DecrementStock(decrements[0]);
                             Walmart.DecrementStock(decrements[1]);
