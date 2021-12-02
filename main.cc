@@ -168,8 +168,23 @@ int main()
 
                 // rt: move to login
 
-                if(Register(user))
-                    cont = 1;
+                if(Register(user)) {
+                    //cont = 1;
+                    string a;
+                    cout << "Would you like to login now? (y/n): ";
+                    cin >> a;
+                    if(a == "y" || a == "YES" || a == "yes" || a == "Yes") {
+                        if(Login(user)) {
+                            cont = 1;
+                        }
+                    }
+                    else if(a == "EXIT") {
+                        answer = "EXIT";
+                    }
+                    else {
+                        continue;
+                    }
+                }
             }
             // rt: EXIT
 

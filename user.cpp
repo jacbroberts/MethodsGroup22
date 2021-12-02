@@ -197,6 +197,7 @@ bool User::Register(std::string inUsername, std::string inPassword, std::string 
     userFileW << ":payment:" << paymentInfo << '\n';
 
     userFileW.close();
+    Logout();
     return true;
 }
 
