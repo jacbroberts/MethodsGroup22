@@ -480,14 +480,27 @@ int main()
                           if(checkoutStatus)
                           {
                             cout << "Checkout Successful" << endl;
+                              
+                            // Decrement stock of items after purchase
+                            Gucci.DecrementStock(decrements[0]);
+                            Walmart.DecrementStock(decrements[1]);
+                            State.DecrementStock(decrements[2]);
+
+                            // Updating inventory file
+                            ofstream outfile;
+                            outfile.open("inventory.txt");
+                            outfile << Gucci.GetID() << endl;
+                            outfile << Gucci.GetCount() << endl;
+                            outfile << Walmart.GetID() << endl;
+                            outfile << Walmart.GetCount() << endl;
+                            outfile << State.GetID() << endl;
+                            outfile << State.GetCount() << endl;
+                            outfile.close();
                           }
                           else
                           {
                             cout << "Checkout Unsuccessful" << endl;
                           }
-                          Gucci.DecrementStock(decrements[0]);
-                          Walmart.DecrementStock(decrements[1]);
-                          State.DecrementStock(decrements[2]);
                         }
 
                         // rt: BACK
