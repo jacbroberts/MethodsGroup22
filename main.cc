@@ -565,7 +565,7 @@ int main()
                         cout << "\n##############################################";
                         cout << "\nThis is where you can browse our inventory\n\n";
                         cout << "We carry Gucci, Walmart Brand, and Hail State merch\n";
-                        cout << "Which brand would you like view? (Enter: GUCCI, WALMART, or HAILSTATE) \n";
+                        cout << "Which brand would you like view? (Enter: GUCCI, WALMART, HAILSTATE, or ALL) \n";
                         cout << "Select an option: ";
 
                         cin >> InvOption;
